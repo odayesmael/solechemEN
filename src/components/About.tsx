@@ -1,0 +1,52 @@
+import { motion } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+export function About() {
+  return (
+    <section className="py-24 bg-white border-b border-slate-200">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="mb-8 lg:mb-0 relative"
+          >
+            <div className="absolute inset-0 bg-brand-orange transform -translate-x-4 translate-y-4"></div>
+            <img 
+              src="/about.webp"
+              alt="SoleChem Europe Chemical Facility" 
+              className="relative z-10 w-full h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="inline-block bg-brand-orange text-white px-3 py-1 text-xs font-bold uppercase tracking-widest mb-6">
+               About SoleChem
+            </span>
+            <h2 className="text-5xl md:text-6xl font-black text-brand-dark mb-6 leading-tight tracking-tight">
+              TECHNICAL EXCELLENCE IN EVERY DROP
+            </h2>
+            <div className="w-12 h-1 bg-brand-orange mb-8"></div>
+            <p className="text-text-secondary mb-6 leading-relaxed">
+              Founded in 2013, SoleChem Europe S.r.l. is a premier global B2B chemical distributor and manufacturer. We provide verified industrial buyers with high-purity chemicals across 50+ countries worldwide.
+            </p>
+            <p className="text-text-secondary mb-10 leading-relaxed">
+              We don't just sell chemicals; we provide supply chain continuity and technical expertise tailored to your industry needs. From custom formulations to large-scale global sourcing, we are your strategic partner.
+            </p>
+            <Link to="/catalog">
+              <button className="bg-brand-dark hover:bg-black text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2 group">
+                Discover Our Capabilities
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}

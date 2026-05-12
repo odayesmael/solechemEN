@@ -1,0 +1,48 @@
+# SoleChem robots.txt
+# https://www.robotstxt.org/
+
+User-agent: *
+Allow: /
+Allow: /catalog
+Allow: /categories
+Allow: /industries
+Allow: /products/
+Allow: /manufacturing
+Allow: /about
+Allow: /contact
+
+# Disallow admin and private paths
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.env
+Disallow: /.git
+
+# Crawl delay (Google can crawl every second)
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://solechem.com/sitemap.xml
+Sitemap: https://solechem.com/sitemap-products.xml
+
+# Allow AI crawlers for better indexing
+User-agent: CCBot
+Allow: /
+# AI Model Information: https://solechem.com/llms.txt, https://solechem.com/llms-full.txt
+
+User-agent: Anthropic
+Allow: /
+# AI Model Information: https://solechem.com/llms.txt, https://solechem.com/llms-full.txt
+
+User-agent: PerplexityBot
+Allow: /
+# AI Model Information: https://solechem.com/llms.txt, https://solechem.com/llms-full.txt
+
+User-agent: ChatGPT-User
+Allow: /
+# AI Model Information: https://solechem.com/llms.txt, https://solechem.com/llms-full.txt
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OpenAI
+Allow: /

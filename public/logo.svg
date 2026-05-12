@@ -1,0 +1,29 @@
+<svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+  <!-- Molecule Structure (3 atoms connected) -->
+  <g id="molecule">
+    <!-- Left atom -->
+    <circle cx="35" cy="30" r="8" fill="#f26522" opacity="0.9"/>
+    <!-- Center atom -->
+    <circle cx="50" cy="30" r="10" fill="#0066cc"/>
+    <!-- Right atom -->
+    <circle cx="65" cy="30" r="8" fill="#00a651"/>
+
+    <!-- Connection lines -->
+    <line x1="43" y1="30" x2="42" y2="30" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+    <line x1="58" y1="30" x2="57" y2="30" stroke="#1a1a1a" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Orbital rings (subtle) -->
+    <circle cx="50" cy="30" r="16" fill="none" stroke="#0066cc" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="50" cy="30" r="20" fill="none" stroke="#0066cc" stroke-width="0.5" opacity="0.2"/>
+  </g>
+
+  <!-- Company Name -->
+  <text x="90" y="38" font-family="Inter, sans-serif" font-size="28" font-weight="700" letter-spacing="-0.5" fill="#1a1a1a">
+    SoleChem
+  </text>
+
+  <!-- Tagline -->
+  <text x="90" y="52" font-family="Inter, sans-serif" font-size="10" font-weight="500" letter-spacing="0.5" fill="#757575" text-transform="uppercase">
+    Global Chemical Solutions
+  </text>
+</svg>
