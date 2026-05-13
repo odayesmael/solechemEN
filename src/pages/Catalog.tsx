@@ -136,17 +136,10 @@ export function Catalog() {
 
     <div className="flex-1 bg-slate-50 flex flex-col">
       <div className="bg-brand-dark pt-32 pb-16 px-4 md:px-10 border-b border-brand-dark relative overflow-hidden">
-        {headerImage && (
-          <>
-            <img src={headerImage} alt="" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-brand-dark/55"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/80 via-brand-dark/40 to-transparent"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-brand-dark/30"></div>
-          </>
-        )}
-        {!headerImage && (
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-        )}
+        <img src={headerImage || '/catalog-hero.png'} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-brand-dark/55"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/80 via-brand-dark/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-brand-dark/30"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           {(activeCategory || activeIndustry) && (
             <Link to="/catalog" className="text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group transition-colors">
