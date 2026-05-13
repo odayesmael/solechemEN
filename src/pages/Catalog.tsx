@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Search, ChevronDown, ChevronLeft, ChevronRight, Download, X, Tag, Factory, MessageSquareQuote } from 'lucide-react';
+import { Search, ChevronDown, ChevronLeft, ChevronRight, X, Tag, Factory, MessageSquareQuote } from 'lucide-react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { categories } from '../data/categories';
 import { industries } from '../data/industries';
@@ -272,9 +272,6 @@ export function Catalog() {
               <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">
                 Showing {((page - 1) * itemsPerPage) + 1}-{Math.min(page * itemsPerPage, filteredProducts.length)} of {filteredProducts.length} Results
               </div>
-              <button className="text-xs font-bold text-brand-blue uppercase tracking-widest hover:text-brand-orange transition-colors flex items-center gap-1">
-                <Download className="w-4 h-4" /> Download PDF
-              </button>
             </div>
 
             <div className="bg-white border text-sm border-slate-200 overflow-x-auto shadow-sm">
