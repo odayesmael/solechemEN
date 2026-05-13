@@ -1,11 +1,8 @@
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
 import { categories } from '../data/categories';
 
 export function CategoriesGrid() {
-  const navigate = useNavigate();
-
   return (
     <section id="categories" className="bg-slate-50 flex flex-col border-b border-slate-200">
       <div className="p-8 md:p-16 border-b border-slate-200 flex flex-col md:flex-row md:items-end justify-between gap-6 bg-white">
@@ -17,17 +14,17 @@ export function CategoriesGrid() {
             EXPLORE OUR <br className="hidden md:block"/> CHEMICAL PORTFOLIO
           </h3>
         </div>
-        <Link to="/categories" className="flex items-center gap-2 text-slate-600 hover:text-brand-orange font-bold uppercase tracking-widest text-xs transition-colors group">
+        <a href="/categories" className="flex items-center gap-2 text-slate-600 hover:text-brand-orange font-bold uppercase tracking-widest text-xs transition-colors group">
           View all categories
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
-        </Link>
+        </a>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 w-full border-t border-slate-200">
         {categories.slice(0, 12).map((cat) => (
           <div
             key={cat.name}
-            onClick={() => navigate(`/catalog?category=${encodeURIComponent(cat.name)}`)}
+            onClick={() => window.location.href = `/catalog?category=${encodeURIComponent(cat.name)}`}
             className="group relative h-40 md:h-48 xl:h-56 overflow-hidden cursor-pointer border-b border-r border-slate-200 bg-brand-dark"
           >
             <div 

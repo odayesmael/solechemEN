@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Manufacturing } from '../views/Manufacturing';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Manufacturing', url: buildCanonicalUrl('/manufacturing') },
+]);
+---
+
+<Layout
+  title="Chemical Manufacturing Services | Toll & Contract Manufacturing | SoleChem"
+  description="State-of-the-art chemical manufacturing: toll manufacturing, contract manufacturing, custom formulations, and blending. ISO 9001, ISO 22000 & GMP+ certified."
+  canonical={buildCanonicalUrl('/manufacturing')}
+  jsonLd={[breadcrumb]}
+>
+  <Manufacturing client:load />
+</Layout>

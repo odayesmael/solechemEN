@@ -1,15 +1,16 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Search, ChevronDown, ChevronLeft, ChevronRight, X, Tag, Factory, MessageSquareQuote } from 'lucide-react';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import { categories } from '../data/categories';
 import { industries } from '../data/industries';
 import { QuoteModal } from '../components/QuoteModal';
-import { buildMetadata, buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+function getSearchParams() {
+  if (typeof window === 'undefined') return new URLSearchParams();
+  return new URLSearchParams(window.location.search);
+}
 
 export function Catalog() {
-  const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const searchParams = getSearchParams();
   const initialQuery = searchParams.get('q') || '';
   const activeCategory = searchParams.get('category') || '';
   const activeIndustry = searchParams.get('industry') || '';
@@ -20,11 +21,6 @@ export function Catalog() {
   const [page, setPage] = useState(1);
   const [quoteProduct, setQuoteProduct] = useState<{ name: string; cas: string } | null>(null);
   const itemsPerPage = 50;
-
-  useEffect(() => {
-    setSearch(searchParams.get('q') || '');
-    setPage(1);
-  }, [searchParams]);
 
   useEffect(() => {
     fetch('/data/products.json')
@@ -73,67 +69,7 @@ export function Catalog() {
     return null;
   }, [activeCategory, activeIndustry]);
 
-  const pageTitle = activeCategory && activeIndustry
-    ? `${activeCategory} for ${activeIndustry} | SoleChem`
-    : activeCategory
-    ? `${activeCategory} Chemicals | SoleChem`
-    : activeIndustry
-    ? `Chemicals for ${activeIndustry} | SoleChem`
-    : 'Product Catalog | 4,480+ Industrial Chemicals | SoleChem';
-
-  const pageDescription = activeCategory && activeIndustry
-    ? `Browse ${activeCategory.toLowerCase()} chemicals for ${activeIndustry.toLowerCase()} from SoleChem. ISO 9001 certified products for industrial applications.`
-    : activeCategory
-    ? `Browse high-quality ${activeCategory.toLowerCase()} chemicals from SoleChem. ISO 9001 certified products for industrial applications.`
-    : activeIndustry
-    ? `Chemical solutions for ${activeIndustry.toLowerCase()}. Find specialty chemicals, APIs, and raw materials for your industry needs.`
-    : 'Explore our comprehensive catalog of 4,480+ industrial chemicals, active pharmaceutical ingredients, and specialty compounds. Search by product name, CAS, or EC number.';
-
-  const canonicalParams = new URLSearchParams();
-  if (activeCategory) canonicalParams.set('category', activeCategory);
-  if (activeIndustry) canonicalParams.set('industry', activeIndustry);
-
-  const metadata = buildMetadata({
-    title: pageTitle,
-    description: pageDescription,
-    canonical: buildCanonicalUrl('/catalog' + (canonicalParams.toString() ? `?${canonicalParams}` : '')),
-    ogImage: buildCanonicalUrl('/og-catalog.webp'),
-  });
-
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: 'Home', url: buildCanonicalUrl('/') },
-    { name: 'Catalog', url: buildCanonicalUrl('/catalog') },
-    ...(activeCategory ? [{ name: activeCategory, url: buildCanonicalUrl(`/catalog?category=${activeCategory}`) }] : []),
-    ...(activeIndustry ? [{ name: activeIndustry, url: buildCanonicalUrl(`/catalog?industry=${activeIndustry}`) }] : []),
-  ]);
-
   return (
-    <>
-      <Helmet>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content="chemical catalog, product search, CAS number, industrial chemicals, specialty chemicals, APIs" />
-        <link rel="canonical" href={metadata.canonical} />
-
-        {/* Open Graph Tags */}
-        <meta property="og:title" content={metadata.ogTitle} />
-        <meta property="og:description" content={metadata.ogDescription} />
-        <meta property="og:image" content={metadata.ogImage} />
-        <meta property="og:url" content={metadata.ogUrl} />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Card Tags */}
-        <meta name="twitter:title" content={metadata.twitterTitle} />
-        <meta name="twitter:description" content={metadata.twitterDescription} />
-        <meta name="twitter:image" content={metadata.ogImage} />
-        <meta name="twitter:card" content="summary_large_image" />
-
-        {/* JSON-LD Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumb)}
-        </script>
-      </Helmet>
-
     <div className="flex-1 bg-slate-50 flex flex-col">
       <div className="bg-brand-dark pt-32 pb-16 px-4 md:px-10 border-b border-brand-dark relative overflow-hidden">
         <img src={headerImage || '/catalog-hero.png'} alt="" className="absolute inset-0 w-full h-full object-cover" />
@@ -142,10 +78,10 @@ export function Catalog() {
         <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/70 via-transparent to-brand-dark/30"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           {(activeCategory || activeIndustry) && (
-            <Link to="/catalog" className="text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group transition-colors">
+            <a href="/catalog" className="text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group transition-colors">
               <ChevronLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
               Back to Full Catalog
-            </Link>
+            </a>
           )}
           <h1 className="text-4xl md:text-5xl font-black text-white mb-4">
             {activeCategory && activeIndustry
@@ -182,7 +118,7 @@ export function Catalog() {
                     const params = new URLSearchParams();
                     if (val) params.set('category', val);
                     if (activeIndustry) params.set('industry', activeIndustry);
-                    navigate('/catalog' + (params.toString() ? `?${params}` : ''));
+                    window.location.href = '/catalog' + (params.toString() ? `?${params}` : '');
                   }}
                   className="w-full appearance-none bg-white/10 backdrop-blur-sm text-white pl-11 pr-10 py-4 text-sm font-bold border border-white/20 focus:border-brand-orange focus:outline-none cursor-pointer transition-colors"
                 >
@@ -202,7 +138,7 @@ export function Catalog() {
                     const params = new URLSearchParams();
                     if (activeCategory) params.set('category', activeCategory);
                     if (val) params.set('industry', val);
-                    navigate('/catalog' + (params.toString() ? `?${params}` : ''));
+                    window.location.href = '/catalog' + (params.toString() ? `?${params}` : '');
                   }}
                   className="w-full appearance-none bg-white/10 backdrop-blur-sm text-white pl-11 pr-10 py-4 text-sm font-bold border border-white/20 focus:border-brand-orange focus:outline-none cursor-pointer transition-colors"
                 >
@@ -215,7 +151,7 @@ export function Catalog() {
               </div>
               {(activeCategory || activeIndustry) && (
                 <button
-                  onClick={() => navigate('/catalog')}
+                  onClick={() => { window.location.href = '/catalog'; }}
                   className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-6 py-4 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20 shrink-0"
                 >
                   <X className="w-4 h-4" /> Clear Filters
@@ -282,16 +218,16 @@ export function Catalog() {
                   {paginatedProducts.map(p => (
                     <tr key={p.id} className="hover:bg-slate-50 transition-colors group">
                       <td className="p-4 font-bold text-brand-dark group-hover:text-brand-blue transition-colors">
-                        <Link to={`/products/cas-${p.cas}`}>{p.name}</Link>
+                        <a href={`/products/cas-${p.cas}`}>{p.name}</a>
                       </td>
                       <td className="p-4 text-slate-500 font-mono text-xs hidden sm:table-cell">{p.cas || '-'}</td>
                       <td className="p-4 text-slate-500 font-mono text-xs hidden sm:table-cell">{p.ec || '-'}</td>
                       <td className="p-4 text-slate-600 hidden md:table-cell">{p.category || '-'}</td>
                       <td className="p-4">
                         <div className="flex items-center gap-3">
-                          <Link to={`/products/cas-${p.cas}`} className="text-xs font-bold uppercase tracking-widest text-brand-orange hover:text-brand-dark transition-colors">
+                          <a href={`/products/cas-${p.cas}`} className="text-xs font-bold uppercase tracking-widest text-brand-orange hover:text-brand-dark transition-colors">
                             View Details &rarr;
-                          </Link>
+                          </a>
                           <button
                             onClick={(e) => { e.stopPropagation(); setQuoteProduct({ name: p.name, cas: p.cas }); }}
                             title="Request Quote"
@@ -344,6 +280,5 @@ export function Catalog() {
         />
       )}
     </div>
-    </>
   );
 }

@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Blog } from '../../views/Blog';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Blog', url: buildCanonicalUrl('/blog') },
+]);
+---
+
+<Layout
+  title="Blog & Insights | Chemical Industry News | SoleChem"
+  description="Expert insights on chemical manufacturing, compliance, quality control, and industry trends from SoleChem."
+  canonical={buildCanonicalUrl('/blog')}
+  jsonLd={[breadcrumb]}
+>
+  <Blog client:load />
+</Layout>

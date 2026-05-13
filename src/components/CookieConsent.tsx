@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { X, Settings } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 export function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
@@ -149,7 +148,7 @@ export function CookieConsent() {
             </div>
 
             <p className="text-xs text-slate-500 mt-4">
-              See our <Link to="/cookies" className="underline hover:text-slate-700">Cookie Policy</Link> for more details.
+              See our <a href="/cookies" className="underline hover:text-slate-700">Cookie Policy</a> for more details.
             </p>
           </div>
         ) : (
@@ -160,9 +159,9 @@ export function CookieConsent() {
               <p className="text-sm text-slate-600">
                 We use cookies to enhance your experience, analyze traffic, and enable marketing features.
                 Essential cookies are always active. Learn more in our{' '}
-                <Link to="/cookies" className="underline hover:text-slate-900 font-semibold">
+                <a href="/cookies" className="underline hover:text-slate-900 font-semibold">
                   Cookie Policy
-                </Link>.
+                </a>.
               </p>
             </div>
 

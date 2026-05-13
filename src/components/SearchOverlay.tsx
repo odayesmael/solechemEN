@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, X, ArrowRight, Clock, FlaskConical, Hash, Tag, TrendingUp } from 'lucide-react';
 
@@ -153,7 +152,6 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const [loading, setLoading] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
 
   // Load products on first open
   useEffect(() => {
@@ -215,17 +213,17 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const goToProduct = useCallback(
     (product: Product) => {
       onClose();
-      navigate(`/products/cas-${product.cas}`);
+      window.location.href = `/products/cas-${product.cas}`;
     },
-    [navigate, onClose]
+    [onClose]
   );
 
   const goToSearch = useCallback(() => {
     if (query.trim()) {
       onClose();
-      navigate(`/catalog?q=${encodeURIComponent(query.trim())}`);
+      window.location.href = `/catalog?q=${encodeURIComponent(query.trim())}`;
     }
-  }, [query, navigate, onClose]);
+  }, [query, onClose]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     const total = results.length;

@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
 import { ArrowRight, FlaskConical, Settings, Beaker, PackageCheck } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { MoleculeMotif } from './MoleculeMotif';
 
 const features = [
@@ -31,13 +30,13 @@ export function ManufacturingTeaser() {
             <p className="text-base text-text-secondary leading-relaxed mb-8 max-w-lg">
               State-of-the-art facilities equipped with cutting-edge technology. From custom formulations to large-scale toll manufacturing, we deliver premium-quality chemical products with full regulatory compliance.
             </p>
-            <Link
-              to="/manufacturing"
+            <a
+              href="/manufacturing"
               className="inline-flex items-center gap-2 bg-brand-dark hover:bg-black text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors group"
             >
               Explore Manufacturing
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
           </motion.div>
 
           <motion.div

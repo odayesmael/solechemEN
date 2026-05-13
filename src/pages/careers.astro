@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Careers } from '../views/Careers';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Careers', url: buildCanonicalUrl('/careers') },
+]);
+---
+
+<Layout
+  title="Careers at SoleChem | Join Our Team | Sole Talent"
+  description="Join SoleChem's growing team. Explore open positions in chemical sales, logistics, R&D, and more."
+  canonical={buildCanonicalUrl('/careers')}
+  jsonLd={[breadcrumb]}
+>
+  <Careers client:load />
+</Layout>

@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { About } from '../views/About';
+import { buildCanonicalUrl, buildBreadcrumbSchema, organizationSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'About', url: buildCanonicalUrl('/about') },
+]);
+---
+
+<Layout
+  title="About SoleChem | Global Chemical Distributor Since 2013"
+  description="SoleChem Europe S.r.l. is a global B2B chemical distributor and manufacturer serving 50+ countries with 4,480+ products since 2013."
+  canonical={buildCanonicalUrl('/about')}
+  jsonLd={[breadcrumb, organizationSchema]}
+>
+  <About client:load />
+</Layout>

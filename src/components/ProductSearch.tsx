@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import type { FormEvent } from 'react';
 import { Search } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useNavigate, Link } from 'react-router-dom';
 
 export function ProductSearch() {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   const [query, setQuery] = useState('');
-  const navigate = useNavigate();
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e: FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/catalog?q=${encodeURIComponent(query)}`);
+      window.location.href = `/catalog?q=${encodeURIComponent(query)}`;
     } else {
-      navigate('/catalog');
+      window.location.href = '/catalog';
     }
   };
 
@@ -73,13 +72,13 @@ export function ProductSearch() {
           <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-6">Browse Alphabetically</p>
           <div className="flex flex-wrap justify-center gap-1">
             {letters.map((letter) => (
-              <Link 
-                to={`/catalog?q=${letter}`}
+              <a
+                href={`/catalog?q=${letter}`}
                 key={letter}
                 className="w-10 h-10 md:w-12 md:h-12 bg-white hover:bg-brand-dark text-slate-600 hover:text-white flex items-center justify-center font-black text-lg transition-colors border border-slate-200 hover:border-brand-dark"
               >
                 {letter}
-              </Link>
+              </a>
             ))}
           </div>
         </motion.div>

@@ -1,17 +1,7 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link, useParams, Navigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, Calendar, Clock, User, ChevronDown, Share2, BookOpen } from 'lucide-react';
 import { getBlogArticleBySlug, getRelatedArticles, type BlogSection } from '../data/blog';
-import {
-  buildMetadata,
-  buildCanonicalUrl,
-  buildBreadcrumbSchema,
-  buildArticleSchema,
-  buildFAQSchema,
-} from '../utils/seo';
-
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('en-US', {
     year: 'numeric',
@@ -106,62 +96,18 @@ function FAQAccordion({ faqs }: { faqs: Array<{ question: string; answer: string
   );
 }
 
-export function BlogArticle() {
-  const { slug } = useParams<{ slug: string }>();
-  const article = slug ? getBlogArticleBySlug(slug) : undefined;
+export function BlogArticle({ slug }: { slug: string }) {
+  const article = getBlogArticleBySlug(slug);
 
-  if (!article) return <Navigate to="/blog" replace />;
+  if (!article) {
+    if (typeof window !== 'undefined') window.location.href = '/blog';
+    return null;
+  }
 
   const related = getRelatedArticles(article.slug, article.category);
-  const articleUrl = buildCanonicalUrl(`/blog/${article.slug}`);
-
-  const meta = buildMetadata({
-    title: `${article.title} | SoleChem Blog`,
-    description: article.excerpt,
-    canonical: articleUrl,
-    ogType: 'article',
-    ogImage: article.image,
-    author: article.author,
-  });
-
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: 'Home', url: 'https://solechem.com' },
-    { name: 'Blog', url: 'https://solechem.com/blog' },
-    { name: article.title, url: articleUrl },
-  ]);
-
-  const articleSchema = buildArticleSchema({
-    title: article.title,
-    description: article.excerpt,
-    url: articleUrl,
-    image: article.image,
-    datePublished: article.date,
-    author: article.author,
-  });
-
-  const faqSchema = article.faq.length > 0 ? buildFAQSchema(article.faq) : null;
 
   return (
     <>
-      <Helmet>
-        <title>{meta.title}</title>
-        <meta name="description" content={meta.description} />
-        <link rel="canonical" href={meta.canonical} />
-        <meta property="og:title" content={meta.ogTitle} />
-        <meta property="og:description" content={meta.ogDescription} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={meta.canonical} />
-        {meta.ogImage && <meta property="og:image" content={meta.ogImage} />}
-        <meta name="twitter:title" content={meta.twitterTitle} />
-        <meta name="twitter:description" content={meta.twitterDescription} />
-        <meta name="author" content={article.author} />
-        <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(breadcrumb)}</script>
-        {faqSchema && (
-          <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-        )}
-      </Helmet>
-
       {/* Hero */}
       <section className="bg-brand-dark text-white pt-32 pb-16">
         <div className="max-w-4xl mx-auto px-6 md:px-10">
@@ -171,13 +117,13 @@ export function BlogArticle() {
             transition={{ duration: 0.5 }}
           >
             {/* Back link */}
-            <Link
-              to="/blog"
+            <a
+              href="/blog"
               className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-brand-orange transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Blog
-            </Link>
+            </a>
 
             <div className="flex items-center gap-3 mb-5">
               <span className="bg-brand-orange/20 text-brand-orange text-[10px] font-bold uppercase tracking-widest px-3 py-1">
@@ -239,12 +185,12 @@ export function BlogArticle() {
             <div className="mt-12 pt-8 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Category:</span>
-                <Link
-                  to={`/blog?category=${article.category}`}
+                <a
+                  href={`/blog?category=${article.category}`}
                   className="bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-widest px-3 py-1 hover:bg-brand-orange/10 hover:text-brand-orange transition-colors"
                 >
                   {article.category}
-                </Link>
+                </a>
               </div>
               <button
                 onClick={() => navigator.clipboard?.writeText(window.location.href)}
@@ -283,12 +229,12 @@ export function BlogArticle() {
                 <p className="text-xs text-slate-400 leading-relaxed mb-4">
                   Our team responds within 24 hours to all inquiries.
                 </p>
-                <Link
-                  to="/contact"
+                <a
+                  href="/contact"
                   className="block bg-brand-orange hover:bg-brand-orange-hover text-white text-center py-2.5 text-[10px] font-bold uppercase tracking-widest transition-colors"
                 >
                   Contact Us
-                </Link>
+                </a>
               </div>
             </div>
           </aside>
@@ -325,12 +271,12 @@ export function BlogArticle() {
                   Related Articles
                 </h2>
               </div>
-              <Link
-                to="/blog"
+              <a
+                href="/blog"
                 className="hidden md:inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange hover:text-brand-orange-hover transition-colors"
               >
                 View All <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -342,8 +288,8 @@ export function BlogArticle() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
                 >
-                  <Link
-                    to={`/blog/${rel.slug}`}
+                  <a
+                    href={`/blog/${rel.slug}`}
                     className="group block bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all h-full flex flex-col"
                   >
                     <div className="aspect-[16/10] overflow-hidden">
@@ -367,7 +313,7 @@ export function BlogArticle() {
                         Read Article <ArrowRight className="w-3 h-3" />
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
             </div>
@@ -386,18 +332,18 @@ export function BlogArticle() {
             SoleChem supplies 4,480+ chemicals to 50+ countries with ISO-certified quality and under-24-hour response times.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/catalog"
+            <a
+              href="/catalog"
               className="bg-brand-orange hover:bg-brand-orange-hover text-white px-8 py-3.5 text-xs font-bold uppercase tracking-widest transition-colors"
             >
               Browse Catalog
-            </Link>
-            <Link
-              to="/contact"
+            </a>
+            <a
+              href="/contact"
               className="border border-white/20 hover:border-white/40 text-white px-8 py-3.5 text-xs font-bold uppercase tracking-widest transition-colors"
             >
               Contact Sales
-            </Link>
+            </a>
           </div>
         </div>
       </section>

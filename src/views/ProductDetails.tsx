@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Download, FileText, AlertTriangle, ShieldCheck, Beaker, FlaskConical, Tag, Factory, BookOpen } from 'lucide-react';
 import { QuoteModal } from '../components/QuoteModal';
-import { buildMetadata, buildCanonicalUrl, buildProductSchema, buildBreadcrumbSchema } from '../utils/seo';
 
-export function ProductDetails() {
-  const { slug } = useParams();
+export function ProductDetails({ slug }: { slug?: string }) {
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [showQuote, setShowQuote] = useState(false);
@@ -38,18 +34,12 @@ export function ProductDetails() {
 
   if (!product) {
     return (
-      <>
-        <Helmet>
-          <title>Product Not Found | SoleChem</title>
-          <meta name="robots" content="noindex, follow" />
-        </Helmet>
-        <div className="flex-1 flex items-center justify-center py-32 flex-col space-y-4">
-          <h2 className="text-2xl font-black text-brand-dark">Product Not Found</h2>
-          <Link to="/catalog" className="text-brand-orange hover:text-brand-orange-hover uppercase tracking-widest text-xs font-bold transition-colors">
-            &larr; Back to Catalog
-          </Link>
-        </div>
-      </>
+      <div className="flex-1 flex items-center justify-center py-32 flex-col space-y-4">
+        <h2 className="text-2xl font-black text-brand-dark">Product Not Found</h2>
+        <a href="/catalog" className="text-brand-orange hover:text-brand-orange-hover uppercase tracking-widest text-xs font-bold transition-colors">
+          &larr; Back to Catalog
+        </a>
+      </div>
     );
   }
 
@@ -57,74 +47,20 @@ export function ProductDetails() {
   const tradeReg = product.tradeRegulatory;
   const descParagraphs = product.description ? product.description.split('\n\n') : [];
 
-  const metadata = buildMetadata({
-    title: `${product.name} | Chemical Product | SoleChem`,
-    description: `${product.name} (CAS ${product.cas}). High-purity industrial chemical from SoleChem. ISO 9001 & REACH compliant. Technical specs, safety data, and pricing available.`,
-    canonical: buildCanonicalUrl(`/products/cas-${product.cas}`),
-    ogImage: buildCanonicalUrl('/og-product.webp'),
-  });
-
-  const productSchema = buildProductSchema({
-    name: product.name,
-    description: descParagraphs[0] || product.name,
-    cas: product.cas,
-    ec: product.ec,
-    molWeight: product.molWeight,
-    manufacturer: 'SoleChem',
-    url: buildCanonicalUrl(`/products/cas-${product.cas}`),
-    image: buildCanonicalUrl('/og-product.webp'),
-  });
-
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: 'Home', url: buildCanonicalUrl('/') },
-    { name: 'Catalog', url: buildCanonicalUrl('/catalog') },
-    ...(product.category ? [{ name: product.category, url: buildCanonicalUrl(`/catalog?category=${product.category}`) }] : []),
-    { name: product.name, url: buildCanonicalUrl(`/products/cas-${product.cas}`) },
-  ]);
-
   return (
-    <>
-      <Helmet>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={`${product.name}, CAS ${product.cas}, chemical, ${product.category}, industrial chemical`} />
-        <link rel="canonical" href={metadata.canonical} />
-
-        {/* Open Graph Tags */}
-        <meta property="og:title" content={metadata.ogTitle} />
-        <meta property="og:description" content={metadata.ogDescription} />
-        <meta property="og:image" content={metadata.ogImage} />
-        <meta property="og:url" content={metadata.ogUrl} />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Card Tags */}
-        <meta name="twitter:title" content={metadata.twitterTitle} />
-        <meta name="twitter:description" content={metadata.twitterDescription} />
-        <meta name="twitter:image" content={metadata.ogImage} />
-        <meta name="twitter:card" content="summary_large_image" />
-
-        {/* JSON-LD Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(productSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumb)}
-        </script>
-      </Helmet>
-
     <div className="flex-1 bg-slate-50">
       <div className="bg-brand-dark border-b border-slate-800 text-white pt-32 pb-12 px-4 md:px-10 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <div className="max-w-7xl mx-auto relative z-10">
-          <Link to="/catalog" className="inline-flex items-center gap-2 text-brand-orange hover:text-brand-orange-hover transition-colors text-xs font-bold uppercase tracking-widest mb-8">
+          <a href="/catalog" className="inline-flex items-center gap-2 text-brand-orange hover:text-brand-orange-hover transition-colors text-xs font-bold uppercase tracking-widest mb-8">
             <ArrowLeft className="w-4 h-4" /> Back to Catalog
-          </Link>
+          </a>
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
             <div>
               {product.category ? (
-                <Link to={`/catalog?category=${encodeURIComponent(product.category)}`} className="inline-block bg-brand-orange/20 text-brand-orange hover:bg-brand-orange hover:text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 transition-colors">
+                <a href={`/catalog?category=${encodeURIComponent(product.category)}`} className="inline-block bg-brand-orange/20 text-brand-orange hover:bg-brand-orange hover:text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 transition-colors">
                   {product.category}
-                </Link>
+                </a>
               ) : (
                 <div className="inline-block bg-brand-orange/20 text-brand-orange px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-4">
                   Specialty Chemical
@@ -235,7 +171,7 @@ export function ProductDetails() {
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {product.relatedProducts.map((rp: any) => (
-                    <Link
+                    <a
                       key={rp.cas}
                       to={`/products/cas-${rp.cas}`}
                       className="bg-white border border-slate-200 p-4 hover:border-brand-orange transition-colors group flex justify-between items-center"
@@ -245,7 +181,7 @@ export function ProductDetails() {
                         <div className="text-xs text-slate-400 font-mono mt-1">CAS: {rp.cas}</div>
                       </div>
                       <span className="text-brand-orange text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
-                    </Link>
+                    </a>
                   ))}
                 </div>
               </section>
@@ -278,9 +214,9 @@ export function ProductDetails() {
                   <dt className="text-sm text-slate-500 font-medium">Category</dt>
                   <dd className="text-sm font-bold">
                     {product.category ? (
-                      <Link to={`/catalog?category=${encodeURIComponent(product.category)}`} className="text-brand-orange hover:text-brand-dark transition-colors">
+                      <a href={`/catalog?category=${encodeURIComponent(product.category)}`} className="text-brand-orange hover:text-brand-dark transition-colors">
                         {product.category}
-                      </Link>
+                      </a>
                     ) : '-'}
                   </dd>
                 </div>
@@ -294,13 +230,13 @@ export function ProductDetails() {
               <div className="flex flex-wrap gap-2">
                 {Array.isArray(product.industry) && product.industry.length > 0
                   ? product.industry.map((ind: string, i: number) => (
-                      <Link
+                      <a
                         key={i}
                         to={`/catalog?industry=${encodeURIComponent(ind)}`}
                         className="bg-white border border-slate-200 px-4 py-2 text-xs font-bold text-brand-dark uppercase tracking-widest hover:border-brand-orange hover:text-brand-orange transition-colors"
                       >
                         {ind}
-                      </Link>
+                      </a>
                     ))
                   : <span className="text-slate-500 italic text-sm">Not specified</span>}
               </div>
@@ -338,6 +274,5 @@ export function ProductDetails() {
         />
       )}
     </div>
-    </>
   );
 }

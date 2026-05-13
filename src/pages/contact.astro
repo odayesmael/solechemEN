@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Contact } from '../views/Contact';
+import { buildCanonicalUrl, buildBreadcrumbSchema, localBusinessSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Contact', url: buildCanonicalUrl('/contact') },
+]);
+---
+
+<Layout
+  title="Contact SoleChem | B2B Chemical Enquiries | Get a Quote"
+  description="Contact SoleChem for B2B chemical enquiries, pricing, and technical support. We respond within 24 hours to all requests."
+  canonical={buildCanonicalUrl('/contact')}
+  jsonLd={[breadcrumb, localBusinessSchema]}
+>
+  <Contact client:load />
+</Layout>

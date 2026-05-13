@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { ProductDetails } from '../../views/ProductDetails';
+
+const { slug } = Astro.params;
+---
+
+<Layout
+  title="Chemical Product | SoleChem"
+  description="High-purity industrial chemical from SoleChem. ISO 9001 & REACH compliant."
+>
+  <ProductDetails slug={slug} client:load />
+</Layout>

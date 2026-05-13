@@ -1,6 +1,5 @@
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 export function About() {
   return (
@@ -38,12 +37,12 @@ export function About() {
             <p className="text-text-secondary mb-10 leading-relaxed">
               We don't just sell chemicals; we provide supply chain continuity and technical expertise tailored to your industry needs. From custom formulations to large-scale global sourcing, we are your strategic partner.
             </p>
-            <Link to="/catalog">
+            <a href="/catalog">
               <button className="bg-brand-dark hover:bg-black text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2 group">
                 Discover Our Capabilities
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
-            </Link>
+            </a>
           </motion.div>
         </div>
       </div>

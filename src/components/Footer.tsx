@@ -1,5 +1,4 @@
 import { MapPin, Phone, Mail, Linkedin } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,13 +10,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
 
           <div className="lg:col-span-4">
-            <Link to="/" className="inline-block mb-6">
+            <a href="/" className="inline-block mb-6">
               <img
                 src="/logo-footer.png"
                 alt="SoleChem"
                 className="h-10 w-auto"
               />
-            </Link>
+            </a>
             <p className="text-sm leading-relaxed text-slate-400 max-w-xs mb-8">
               Your global chemical partner providing top-tier manufacturing, fast logistics, and exceptional technical support to 50+ countries since 2013.
             </p>
@@ -31,22 +30,22 @@ export function Footer() {
           <div className="lg:col-span-2">
             <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-6">Company</h4>
             <ul className="space-y-3">
-              <li><Link to="/about" className="text-sm hover:text-brand-orange transition-colors">About Us</Link></li>
-              <li><Link to="/team" className="text-sm hover:text-brand-orange transition-colors">Our Team</Link></li>
-              <li><Link to="/manufacturing" className="text-sm hover:text-brand-orange transition-colors">Manufacturing</Link></li>
-              <li><Link to="/careers" className="text-sm hover:text-brand-orange transition-colors">Sole Talent</Link></li>
+              <li><a href="/about" className="text-sm hover:text-brand-orange transition-colors">About Us</a></li>
+              <li><a href="/team" className="text-sm hover:text-brand-orange transition-colors">Our Team</a></li>
+              <li><a href="/manufacturing" className="text-sm hover:text-brand-orange transition-colors">Manufacturing</a></li>
+              <li><a href="/careers" className="text-sm hover:text-brand-orange transition-colors">Sole Talent</a></li>
             </ul>
           </div>
 
           <div className="lg:col-span-2">
             <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-6">Products</h4>
             <ul className="space-y-3">
-              <li><Link to="/catalog" className="text-sm hover:text-brand-orange transition-colors">Product Catalog</Link></li>
-              <li><Link to="/categories" className="text-sm hover:text-brand-orange transition-colors">By Category</Link></li>
-              <li><Link to="/industries" className="text-sm hover:text-brand-orange transition-colors">By Industry</Link></li>
-              <li><Link to="/blog" className="text-sm hover:text-brand-orange transition-colors">Blog & Insights</Link></li>
-              <li><Link to="/faq" className="text-sm hover:text-brand-orange transition-colors">FAQ</Link></li>
-              <li><Link to="/contact" className="text-sm hover:text-brand-orange transition-colors">Contact Us</Link></li>
+              <li><a href="/catalog" className="text-sm hover:text-brand-orange transition-colors">Product Catalog</a></li>
+              <li><a href="/categories" className="text-sm hover:text-brand-orange transition-colors">By Category</a></li>
+              <li><a href="/industries" className="text-sm hover:text-brand-orange transition-colors">By Industry</a></li>
+              <li><a href="/blog" className="text-sm hover:text-brand-orange transition-colors">Blog & Insights</a></li>
+              <li><a href="/faq" className="text-sm hover:text-brand-orange transition-colors">FAQ</a></li>
+              <li><a href="/contact" className="text-sm hover:text-brand-orange transition-colors">Contact Us</a></li>
             </ul>
           </div>
 
@@ -91,9 +90,9 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-14 flex flex-col md:flex-row items-center justify-between text-xs font-medium text-slate-500 uppercase tracking-widest">
           <div>&copy; {currentYear} SoleChem Europe S.r.l. &mdash; All Rights Reserved</div>
           <div className="flex gap-6 mt-2 md:mt-0">
-            <Link to="/privacy" className="hover:text-slate-300 transition-colors">Privacy</Link>
-            <Link to="/terms" className="hover:text-slate-300 transition-colors">Terms</Link>
-            <Link to="/cookies" className="hover:text-slate-300 transition-colors">Cookies</Link>
+            <a href="/privacy" className="hover:text-slate-300 transition-colors">Privacy</a>
+            <a href="/terms" className="hover:text-slate-300 transition-colors">Terms</a>
+            <a href="/cookies" className="hover:text-slate-300 transition-colors">Cookies</a>
           </div>
         </div>
       </div>

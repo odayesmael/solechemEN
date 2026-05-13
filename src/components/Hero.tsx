@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { QuoteModal } from './QuoteModal';
 import { MoleculeMotif } from './MoleculeMotif';
@@ -51,10 +50,10 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-3"
         >
-          <Link to="/catalog" className="bg-brand-orange text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-brand-orange-hover transition-colors flex items-center justify-center gap-2 group">
+          <a href="/catalog" className="bg-brand-orange text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-brand-orange-hover transition-colors flex items-center justify-center gap-2 group">
             Explore Products
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </a>
           <button
             onClick={() => setShowQuote(true)}
             className="border border-white/20 text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"

@@ -1,9 +1,7 @@
-import { useState, FormEvent } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { useState } from 'react';
+import type { FormEvent } from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, Phone, Mail, MapPin, Clock, Globe, Shield, FlaskConical, Send, CheckCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { buildMetadata, buildCanonicalUrl, organizationSchema, buildBreadcrumbSchema } from '../utils/seo';
 
 const enquiryTypes = ['RFQ / Pricing', 'Custom Formulation', 'Supply Agreement', 'Toll Manufacturing', 'Sample Request'];
 
@@ -15,18 +13,6 @@ const badges = [
 ];
 
 export function Contact() {
-  const metadata = buildMetadata({
-    title: 'Contact SoleChem | B2B Chemical Inquiries',
-    description: 'Contact SoleChem for RFQ, custom formulations, toll manufacturing, and supply agreements. 24-hour response guarantee. B2B enquiries welcome worldwide.',
-    canonical: buildCanonicalUrl('/contact'),
-    ogImage: buildCanonicalUrl('/og-contact.webp'),
-  });
-
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: 'Home', url: buildCanonicalUrl('/') },
-    { name: 'Contact', url: buildCanonicalUrl('/contact') },
-  ]);
-
   const [form, setForm] = useState({
     name: '', jobTitle: '', company: '', vat: '',
     email: '', phone: '', enquiryType: '', requirements: '', nda: false,
@@ -47,44 +33,15 @@ export function Contact() {
   }
 
   return (
-    <>
-      <Helmet>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content="contact, RFQ, inquiry, chemical supplier, B2B, toll manufacturing, custom formulations" />
-        <link rel="canonical" href={metadata.canonical} />
-
-        {/* Open Graph Tags */}
-        <meta property="og:title" content={metadata.ogTitle} />
-        <meta property="og:description" content={metadata.ogDescription} />
-        <meta property="og:image" content={metadata.ogImage} />
-        <meta property="og:url" content={metadata.ogUrl} />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Card Tags */}
-        <meta name="twitter:title" content={metadata.twitterTitle} />
-        <meta name="twitter:description" content={metadata.twitterDescription} />
-        <meta name="twitter:image" content={metadata.ogImage} />
-        <meta name="twitter:card" content="summary_large_image" />
-
-        {/* JSON-LD Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(organizationSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumb)}
-        </script>
-      </Helmet>
-
     <div className="flex-1 bg-white flex flex-col">
       {/* Header */}
       <div className="bg-brand-dark pt-32 pb-16 px-4 md:px-10 border-b border-brand-dark relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div className="max-w-7xl mx-auto relative z-10">
-          <Link to="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold group mb-6 transition-colors">
+          <a href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold group mb-6 transition-colors">
             <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
             Back to Home
-          </Link>
+          </a>
           <span className="block bg-brand-orange text-white px-2 py-1 text-[10px] font-bold uppercase tracking-widest w-fit mb-4">
             B2B Enquiries Welcome
           </span>
@@ -261,6 +218,5 @@ export function Contact() {
         </div>
       </div>
     </div>
-    </>
   );
 }

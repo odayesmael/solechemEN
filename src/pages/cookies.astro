@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Cookies } from '../views/Cookies';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Cookie Policy', url: buildCanonicalUrl('/cookies') },
+]);
+---
+
+<Layout
+  title="Cookie Policy | SoleChem"
+  description="SoleChem cookie policy. Learn about the cookies we use and how to manage your preferences."
+  canonical={buildCanonicalUrl('/cookies')}
+  jsonLd={[breadcrumb]}
+>
+  <Cookies />
+</Layout>

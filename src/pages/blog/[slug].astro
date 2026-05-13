@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { BlogArticle } from '../../views/BlogArticle';
+import { getBlogArticleBySlug } from '../../data/blog';
+import {
+  buildCanonicalUrl,
+  buildBreadcrumbSchema,
+  buildArticleSchema,
+  buildFAQSchema,
+} from '../../utils/seo';
+
+const { slug } = Astro.params;
+const article = slug ? getBlogArticleBySlug(slug) : undefined;
+
+if (!article) {
+  return Astro.redirect('/blog');
+}
+
+const articleUrl = buildCanonicalUrl(`/blog/${article.slug}`);
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Blog', url: buildCanonicalUrl('/blog') },
+  { name: article.title, url: articleUrl },
+]);
+
+const articleSchema = buildArticleSchema({
+  title: article.title,
+  description: article.excerpt,
+  url: articleUrl,
+  image: article.image,
+  datePublished: article.date,
+  author: article.author,
+});
+
+const faqSchema = article.faq.length > 0 ? buildFAQSchema(article.faq) : null;
+
+const jsonLd = [breadcrumb, articleSchema];
+if (faqSchema) jsonLd.push(faqSchema);
+---
+
+<Layout
+  title={`${article.title} | SoleChem Blog`}
+  description={article.excerpt}
+  canonical={articleUrl}
+  ogType="article"
+  ogImage={article.image}
+  jsonLd={jsonLd}
+>
+  <BlogArticle slug={slug!} client:load />
+</Layout>

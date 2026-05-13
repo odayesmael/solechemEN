@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Team } from '../views/Team';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Our Team', url: buildCanonicalUrl('/team') },
+]);
+---
+
+<Layout
+  title="Our Team | Meet the People Behind SoleChem"
+  description="Meet SoleChem's leadership and management team. Experienced professionals driving global chemical distribution and manufacturing."
+  canonical={buildCanonicalUrl('/team')}
+  jsonLd={[breadcrumb]}
+>
+  <Team client:visible />
+</Layout>

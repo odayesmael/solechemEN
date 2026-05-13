@@ -1,23 +1,7 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowRight, Calendar, Clock, User, BookOpen, Search } from 'lucide-react';
 import { blogArticles, blogCategories } from '../data/blog';
-import { buildMetadata, buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
-
-const meta = buildMetadata({
-  title: 'Blog & Insights | SoleChem — Chemical Industry News & Guides',
-  description: 'Expert articles on chemical compliance, manufacturing, quality assurance, and industry trends. Practical guides for B2B chemical buyers from SoleChem.',
-  canonical: buildCanonicalUrl('/blog'),
-  ogType: 'website',
-  keywords: 'chemical industry blog, REACH compliance, chemical manufacturing, COA guide, SDS guide, industrial chemicals, B2B chemical supplier',
-});
-
-const breadcrumb = buildBreadcrumbSchema([
-  { name: 'Home', url: 'https://solechem.com' },
-  { name: 'Blog & Insights', url: 'https://solechem.com/blog' },
-]);
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString('en-US', {
@@ -44,20 +28,6 @@ export function Blog() {
 
   return (
     <>
-      <Helmet>
-        <title>{meta.title}</title>
-        <meta name="description" content={meta.description} />
-        <meta name="keywords" content={meta.keywords} />
-        <link rel="canonical" href={meta.canonical} />
-        <meta property="og:title" content={meta.ogTitle} />
-        <meta property="og:description" content={meta.ogDescription} />
-        <meta property="og:type" content={meta.ogType} />
-        <meta property="og:url" content={meta.canonical} />
-        <meta name="twitter:title" content={meta.twitterTitle} />
-        <meta name="twitter:description" content={meta.twitterDescription} />
-        <script type="application/ld+json">{JSON.stringify(breadcrumb)}</script>
-      </Helmet>
-
       {/* Hero */}
       <section className="bg-brand-dark text-white pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
@@ -90,7 +60,7 @@ export function Blog() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
         >
-          <Link
+          <a
             to={`/blog/${featured.slug}`}
             className="group block bg-white border border-slate-200 shadow-lg hover:shadow-xl transition-all overflow-hidden"
           >
@@ -132,7 +102,7 @@ export function Blog() {
                 </div>
               </div>
             </div>
-          </Link>
+          </a>
         </motion.div>
       </section>
 
@@ -187,7 +157,7 @@ export function Blog() {
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
               >
-                <Link
+                <a
                   to={`/blog/${article.slug}`}
                   className="group block bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all h-full flex flex-col"
                 >
@@ -223,7 +193,7 @@ export function Blog() {
                       </span>
                     </div>
                   </div>
-                </Link>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -242,12 +212,12 @@ export function Blog() {
           <p className="text-slate-400 leading-relaxed mb-8">
             Get expert guidance on chemical procurement, compliance, and manufacturing. Our team responds within 24 hours.
           </p>
-          <Link
-            to="/contact"
+          <a
+            href="/contact"
             className="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orange-hover text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors"
           >
             Contact Our Team <ArrowRight className="w-4 h-4" />
-          </Link>
+          </a>
         </div>
       </section>
     </>

@@ -1,10 +1,7 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, CheckCircle2, Globe, Factory, Award, ShieldCheck, MapPin, Target, Handshake, Leaf, Sparkles } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { QuoteModal } from '../components/QuoteModal';
-import { buildMetadata, buildCanonicalUrl, organizationSchema, buildBreadcrumbSchema } from '../utils/seo';
 
 const stats = [
   { value: '2013', label: 'Established' },
@@ -48,48 +45,7 @@ const certifications = [
 export function About() {
   const [showQuote, setShowQuote] = useState(false);
 
-  const metadata = buildMetadata({
-    title: 'About SoleChem | Global Chemical Distributor & Manufacturer',
-    description: 'Learn about SoleChem, a leading global B2B chemical distributor and manufacturer since 2013. ISO 9001, ISO 22000 & GMP+ certified. Serving 50+ countries with 4,480+ high-purity chemical products.',
-    canonical: buildCanonicalUrl('/about'),
-    ogImage: buildCanonicalUrl('/og-about.webp'),
-  });
-
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: 'Home', url: buildCanonicalUrl('/') },
-    { name: 'About Us', url: buildCanonicalUrl('/about') },
-  ]);
-
   return (
-    <>
-      <Helmet>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content="global chemical distributor, chemical manufacturer, B2B chemicals, international chemical supplier, worldwide chemicals, ISO 9001, GMP+" />
-        <link rel="canonical" href={metadata.canonical} />
-
-        {/* Open Graph Tags */}
-        <meta property="og:title" content={metadata.ogTitle} />
-        <meta property="og:description" content={metadata.ogDescription} />
-        <meta property="og:image" content={metadata.ogImage} />
-        <meta property="og:url" content={metadata.ogUrl} />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Card Tags */}
-        <meta name="twitter:title" content={metadata.twitterTitle} />
-        <meta name="twitter:description" content={metadata.twitterDescription} />
-        <meta name="twitter:image" content={metadata.ogImage} />
-        <meta name="twitter:card" content="summary_large_image" />
-
-        {/* JSON-LD Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(organizationSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumb)}
-        </script>
-      </Helmet>
-
     <div className="flex-1 bg-white flex flex-col">
       {/* Hero Header */}
       <div className="bg-brand-dark pt-32 pb-20 px-4 md:px-10 relative overflow-hidden">
@@ -98,10 +54,10 @@ export function About() {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <Link to="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold group mb-6 transition-colors">
+          <a href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold group mb-6 transition-colors">
             <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
             Back to Home
-          </Link>
+          </a>
           <span className="block bg-brand-orange text-white px-2 py-1 text-[10px] font-bold uppercase tracking-widest w-fit mb-4">
             Global Supplier · Since 2013
           </span>
@@ -246,13 +202,13 @@ export function About() {
                 </div>
               </div>
 
-              <Link
-                to="/manufacturing"
+              <a
+                href="/manufacturing"
                 className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange hover:text-brand-orange-hover transition-colors group"
               >
                 Explore Manufacturing Capabilities
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
             </div>
 
             <div className="bg-white border border-slate-200 p-8">
@@ -293,18 +249,18 @@ export function About() {
             </p>
           </div>
           <div className="flex gap-4 shrink-0">
-            <Link
-              to="/contact"
+            <a
+              href="/contact"
               className="bg-brand-orange hover:bg-brand-orange-hover text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2"
             >
               Contact Us Today <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="/catalog"
+            </a>
+            <a
+              href="/catalog"
               className="border border-white/20 hover:border-white/40 text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors"
             >
               Browse Products
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -313,6 +269,5 @@ export function About() {
         <QuoteModal productName="General Inquiry" onClose={() => setShowQuote(false)} />
       )}
     </div>
-    </>
   );
 }

@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Menu, X, ChevronRight, ChevronDown, Search, Globe, ArrowRight, Tag, Factory, FlaskConical, Phone, Settings, PackageCheck, Beaker, Droplets, ShieldCheck, Award, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link } from 'react-router-dom';
 import { categories } from '../data/categories';
 import { industries } from '../data/industries';
 import { QuoteModal } from './QuoteModal';
@@ -65,13 +64,13 @@ export function Navbar() {
     <nav ref={navRef} className="bg-white border-b border-slate-200 sticky top-0 z-50">
       <div className="h-20 px-4 md:px-10 flex items-center justify-between max-w-[1440px] mx-auto">
         {/* Logo */}
-        <Link to="/" className="shrink-0 hover:opacity-80 transition-opacity">
+        <a href="/" className="shrink-0 hover:opacity-80 transition-opacity">
           <img
             src="/logo.webp"
             alt="SoleChem Logo"
             className="h-12 w-auto"
           />
-        </Link>
+        </a>
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-1">
@@ -80,13 +79,13 @@ export function Navbar() {
             onMouseEnter={() => openMega('products')}
             onMouseLeave={closeMega}
           >
-            <Link
-              to="/catalog"
+            <a
+              href="/catalog"
               className={`px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-1 ${activeMega === 'products' ? 'text-brand-orange' : 'text-slate-500 hover:text-brand-orange'}`}
             >
               Products
               <ChevronDown className={`w-3 h-3 transition-transform ${activeMega === 'products' ? 'rotate-180' : ''}`} />
-            </Link>
+            </a>
           </div>
 
           {/* Industries */}
@@ -94,13 +93,13 @@ export function Navbar() {
             onMouseEnter={() => openMega('industries')}
             onMouseLeave={closeMega}
           >
-            <Link
-              to="/industries"
+            <a
+              href="/industries"
               className={`px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-1 ${activeMega === 'industries' ? 'text-brand-orange' : 'text-slate-500 hover:text-brand-orange'}`}
             >
               Industries
               <ChevronDown className={`w-3 h-3 transition-transform ${activeMega === 'industries' ? 'rotate-180' : ''}`} />
-            </Link>
+            </a>
           </div>
 
           {/* Manufacturing */}
@@ -108,26 +107,26 @@ export function Navbar() {
             onMouseEnter={() => openMega('manufacturing')}
             onMouseLeave={closeMega}
           >
-            <Link
-              to="/manufacturing"
+            <a
+              href="/manufacturing"
               className={`px-4 py-2 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-1 ${activeMega === 'manufacturing' ? 'text-brand-orange' : 'text-slate-500 hover:text-brand-orange'}`}
             >
               Manufacturing
               <ChevronDown className={`w-3 h-3 transition-transform ${activeMega === 'manufacturing' ? 'rotate-180' : ''}`} />
-            </Link>
+            </a>
           </div>
 
-          <Link to="/about" className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-brand-orange transition-colors">
+          <a href="/about" className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-brand-orange transition-colors">
             About
-          </Link>
+          </a>
 
-          <Link to="/blog" className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-brand-orange transition-colors">
+          <a href="/blog" className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-brand-orange transition-colors">
             Blog
-          </Link>
+          </a>
 
-          <Link to="/contact" className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-brand-orange transition-colors">
+          <a href="/contact" className="px-4 py-2 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-brand-orange transition-colors">
             Contact
-          </Link>
+          </a>
         </div>
 
         {/* Actions */}
@@ -180,30 +179,30 @@ export function Navbar() {
                   <p className="text-xs text-slate-500 leading-relaxed mb-6">
                     Browse our catalog of 4,480+ chemicals across {categories.length} categories.
                   </p>
-                  <Link
-                    to="/categories"
+                  <a
+                    href="/categories"
                     onClick={() => setActiveMega(null)}
                     className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange hover:text-brand-orange-hover transition-colors group"
                   >
                     View All Categories
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </a>
                 </div>
-                <Link
-                  to="/catalog"
+                <a
+                  href="/catalog"
                   onClick={() => setActiveMega(null)}
                   className="mt-8 bg-brand-dark hover:bg-black text-white px-5 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors text-center flex items-center justify-center gap-2"
                 >
                   <Search className="w-3.5 h-3.5" />
                   Search All Products
-                </Link>
+                </a>
               </div>
 
               {/* Categories grid */}
               <div className="flex-1 p-8">
                 <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-1">
                   {categories.map((cat) => (
-                    <Link
+                    <a
                       key={cat.name}
                       to={`/catalog?category=${encodeURIComponent(cat.name)}`}
                       onClick={() => setActiveMega(null)}
@@ -211,7 +210,7 @@ export function Navbar() {
                     >
                       <ChevronRight className="w-3 h-3 text-slate-300 group-hover:text-brand-orange transition-colors" />
                       <span className="text-sm text-slate-600 group-hover:text-brand-dark font-medium transition-colors">{cat.name}</span>
-                    </Link>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -240,14 +239,14 @@ export function Navbar() {
                   <p className="text-xs text-slate-500 leading-relaxed mb-6">
                     Specialized chemical solutions for {industries.length} global industries.
                   </p>
-                  <Link
-                    to="/industries"
+                  <a
+                    href="/industries"
                     onClick={() => setActiveMega(null)}
                     className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange hover:text-brand-orange-hover transition-colors group"
                   >
                     Explore All Industries
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </a>
                 </div>
                 <div className="mt-8 bg-brand-dark p-5 text-white">
                   <div className="flex items-center gap-2 mb-2">
@@ -268,7 +267,7 @@ export function Navbar() {
               <div className="flex-1 p-8">
                 <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-1">
                   {industries.map((ind) => (
-                    <Link
+                    <a
                       key={ind.name}
                       to={`/catalog?industry=${encodeURIComponent(ind.name)}`}
                       onClick={() => setActiveMega(null)}
@@ -276,7 +275,7 @@ export function Navbar() {
                     >
                       <img src={ind.image} alt="" className="w-8 h-8 rounded-sm object-cover shrink-0 opacity-70 group-hover:opacity-100 transition-opacity" />
                       <span className="text-sm text-slate-600 group-hover:text-brand-dark font-medium transition-colors">{ind.name}</span>
-                    </Link>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -304,14 +303,14 @@ export function Navbar() {
                   <p className="text-xs text-slate-500 leading-relaxed mb-6">
                     State-of-the-art facilities delivering premium-quality chemical products through batch and continuous processes.
                   </p>
-                  <Link
-                    to="/manufacturing"
+                  <a
+                    href="/manufacturing"
                     onClick={() => setActiveMega(null)}
                     className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-orange hover:text-brand-orange-hover transition-colors group"
                   >
                     Explore Manufacturing
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                  </a>
                 </div>
                 <div className="mt-8 space-y-3">
                   {mfgCerts.map(cert => (
@@ -330,9 +329,9 @@ export function Navbar() {
               <div className="flex-1 p-8">
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
                   {mfgServices.map((svc) => (
-                    <Link
+                    <a
                       key={svc.title}
-                      to="/manufacturing"
+                      href="/manufacturing"
                       onClick={() => setActiveMega(null)}
                       className="flex items-start gap-4 p-5 rounded-sm hover:bg-slate-50 group transition-colors border border-transparent hover:border-slate-200"
                     >
@@ -343,7 +342,7 @@ export function Navbar() {
                         <h4 className="text-sm font-bold text-brand-dark group-hover:text-brand-orange transition-colors mb-1">{svc.title}</h4>
                         <p className="text-xs text-slate-500 leading-relaxed">{svc.desc}</p>
                       </div>
-                    </Link>
+                    </a>
                   ))}
                 </div>
                 <div className="mt-6 pt-5 border-t border-slate-200 flex items-center justify-between">
@@ -371,36 +370,36 @@ export function Navbar() {
             className="lg:hidden bg-white border-b border-slate-200 absolute top-20 left-0 w-full overflow-hidden z-40"
           >
             <div className="p-4 flex flex-col max-h-[80vh] overflow-y-auto">
-              <Link to="/catalog" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              <a href="/catalog" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 Products <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link to="/categories" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              </a>
+              <a href="/categories" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 Categories <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link to="/industries" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              </a>
+              <a href="/industries" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 Industries <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link to="/manufacturing" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              </a>
+              <a href="/manufacturing" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 Manufacturing <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              </a>
+              <a href="/about" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 About <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              </a>
+              <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 Contact <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link to="/team" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              </a>
+              <a href="/team" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 Our Team <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link to="/blog" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              </a>
+              <a href="/blog" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 Blog <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link to="/faq" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              </a>
+              <a href="/faq" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 FAQ <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
-              <Link to="/careers" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
+              </a>
+              <a href="/careers" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between text-xs font-bold uppercase tracking-widest text-slate-800 p-4 border-b border-slate-100 hover:text-brand-orange transition-colors">
                 Sole Talent <ChevronRight className="w-4 h-4 text-slate-400" />
-              </Link>
+              </a>
               <div className="flex gap-3 pt-6 pb-2">
                 <button className="flex-1 border border-brand-dark text-brand-dark px-4 py-3 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2">
                   <Globe className="w-4 h-4" /> EN

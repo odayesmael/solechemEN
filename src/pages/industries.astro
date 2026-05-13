@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Industries } from '../views/Industries';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Industries', url: buildCanonicalUrl('/industries') },
+]);
+---
+
+<Layout
+  title="Industries We Serve | Chemical Solutions by Sector | SoleChem"
+  description="Specialized chemical solutions for 20 global industries including pharmaceuticals, food & beverage, construction, automotive, and more."
+  canonical={buildCanonicalUrl('/industries')}
+  jsonLd={[breadcrumb]}
+>
+  <Industries client:load />
+</Layout>

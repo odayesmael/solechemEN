@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Privacy } from '../views/Privacy';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Privacy Policy', url: buildCanonicalUrl('/privacy') },
+]);
+---
+
+<Layout
+  title="Privacy Policy | SoleChem"
+  description="SoleChem privacy policy. Learn how we collect, use, and protect your personal data in compliance with GDPR."
+  canonical={buildCanonicalUrl('/privacy')}
+  jsonLd={[breadcrumb]}
+>
+  <Privacy />
+</Layout>

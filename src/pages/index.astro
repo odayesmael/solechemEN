@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Hero } from '../components/Hero';
+import { Stats } from '../components/Stats';
+import { IndustriesBlock } from '../components/IndustriesBlock';
+import { About } from '../components/About';
+import { CategoriesGrid } from '../components/CategoriesGrid';
+import { ProductSearch } from '../components/ProductSearch';
+import { Values } from '../components/Values';
+import { TrustedBy } from '../components/TrustedBy';
+import { ManufacturingTeaser } from '../components/ManufacturingTeaser';
+import { CTA } from '../components/CTA';
+import { organizationSchema, buildWebsiteSchema, buildBreadcrumbSchema, buildCanonicalUrl } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+]);
+---
+
+<Layout
+  title="SoleChem | Global Chemical Distributor & Manufacturer | 4,480+ Products"
+  description="Global B2B chemical distributor supplying 4,480+ high-purity products to 50+ countries worldwide. ISO 9001 & GMP+ certified. Polyurethane systems, adhesives, paints, and industrial raw materials."
+  keywords="global chemical distributor, chemical manufacturer, B2B chemicals, industrial chemicals, international chemical supplier, ISO 9001, GMP+"
+  canonical={buildCanonicalUrl('/')}
+  ogImage={buildCanonicalUrl('/og-home.webp')}
+  jsonLd={[organizationSchema, buildWebsiteSchema(), breadcrumb]}
+>
+  <Hero client:load />
+  <Stats client:visible />
+  <IndustriesBlock client:visible />
+  <About />
+  <CategoriesGrid client:visible />
+  <ProductSearch client:load />
+  <Values client:visible />
+  <TrustedBy client:visible />
+  <ManufacturingTeaser client:visible />
+  <CTA client:visible />
+</Layout>

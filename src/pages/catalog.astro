@@ -1,0 +1,48 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Catalog } from '../views/Catalog';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+const url = Astro.url;
+const activeCategory = url.searchParams.get('category') || '';
+const activeIndustry = url.searchParams.get('industry') || '';
+
+const pageTitle = activeCategory && activeIndustry
+  ? `${activeCategory} for ${activeIndustry} | SoleChem`
+  : activeCategory
+  ? `${activeCategory} Chemicals | SoleChem`
+  : activeIndustry
+  ? `Chemicals for ${activeIndustry} | SoleChem`
+  : 'Product Catalog | 4,480+ Industrial Chemicals | SoleChem';
+
+const pageDescription = activeCategory && activeIndustry
+  ? `Browse ${activeCategory.toLowerCase()} chemicals for ${activeIndustry.toLowerCase()} from SoleChem. ISO 9001 certified products for industrial applications.`
+  : activeCategory
+  ? `Browse high-quality ${activeCategory.toLowerCase()} chemicals from SoleChem. ISO 9001 certified products for industrial applications.`
+  : activeIndustry
+  ? `Chemical solutions for ${activeIndustry.toLowerCase()}. Find specialty chemicals, APIs, and raw materials for your industry needs.`
+  : 'Explore our comprehensive catalog of 4,480+ industrial chemicals, active pharmaceutical ingredients, and specialty compounds. Search by product name, CAS, or EC number.';
+
+const canonicalParams = new URLSearchParams();
+if (activeCategory) canonicalParams.set('category', activeCategory);
+if (activeIndustry) canonicalParams.set('industry', activeIndustry);
+const canonical = buildCanonicalUrl('/catalog' + (canonicalParams.toString() ? `?${canonicalParams}` : ''));
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Catalog', url: buildCanonicalUrl('/catalog') },
+  ...(activeCategory ? [{ name: activeCategory, url: buildCanonicalUrl(`/catalog?category=${activeCategory}`) }] : []),
+  ...(activeIndustry ? [{ name: activeIndustry, url: buildCanonicalUrl(`/catalog?industry=${activeIndustry}`) }] : []),
+]);
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  keywords="chemical catalog, product search, CAS number, industrial chemicals, specialty chemicals, APIs"
+  ogImage={buildCanonicalUrl('/og-catalog.webp')}
+  jsonLd={[breadcrumb]}
+>
+  <Catalog client:load />
+</Layout>

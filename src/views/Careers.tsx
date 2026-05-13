@@ -1,9 +1,7 @@
-import { useState, useRef, FormEvent } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { useState, useRef } from 'react';
+import type { FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight, Briefcase, MapPin, Clock, Globe, Users, GraduationCap, Heart, Zap, Send, ChevronDown, ChevronUp, Building2, X, Upload, FileText, CheckCircle, Paperclip } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { buildMetadata, buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
 
 interface Job {
   id: string;
@@ -484,246 +482,186 @@ function JobCard({ job, onApply }: { job: Job; onApply: (title: string) => void 
 export function Careers() {
   const [applyPosition, setApplyPosition] = useState<string | null>(null);
 
-  const metadata = buildMetadata({
-    title: 'Sole Talent | Careers at SoleChem — Join Our Global Team',
-    description: 'Join SoleChem — a leading global chemical distributor serving 50+ countries. Explore open positions in sales, supply chain, technical, and marketing. Upload your CV and build your career in the chemical industry.',
-    canonical: buildCanonicalUrl('/careers'),
-  });
-
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: 'Home', url: buildCanonicalUrl('/') },
-    { name: 'Sole Talent', url: buildCanonicalUrl('/careers') },
-  ]);
-
-  const jobPostingSchema = jobs.map(job => ({
-    '@context': 'https://schema.org',
-    '@type': 'JobPosting',
-    title: job.title,
-    description: job.description,
-    datePosted: '2026-05-01',
-    validThrough: '2026-12-31',
-    employmentType: 'FULL_TIME',
-    hiringOrganization: {
-      '@type': 'Organization',
-      name: 'SoleChem Europe S.r.l.',
-      sameAs: 'https://solechem.com',
-    },
-    jobLocation: {
-      '@type': 'Place',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: job.location.includes('Remote') ? 'Remote' : 'Cassina de\' Pecchi',
-        addressRegion: job.location.includes('Remote') ? '' : 'MI',
-        addressCountry: 'IT',
-      },
-    },
-    industry: 'Chemical Manufacturing & Distribution',
-  }));
-
   return (
-    <>
-      <Helmet>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content="chemical industry careers, SoleChem jobs, B2B chemical jobs, chemical sales jobs, supply chain careers, chemistry careers Europe, Sole Talent" />
-        <link rel="canonical" href={metadata.canonical} />
-        <meta property="og:title" content={metadata.ogTitle} />
-        <meta property="og:description" content={metadata.ogDescription} />
-        <meta property="og:url" content={metadata.ogUrl} />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:title" content={metadata.twitterTitle} />
-        <meta name="twitter:description" content={metadata.twitterDescription} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumb)}
-        </script>
-        {jobPostingSchema.map((schema, i) => (
-          <script key={i} type="application/ld+json">
-            {JSON.stringify(schema)}
-          </script>
-        ))}
-      </Helmet>
+    <div className="flex-1 bg-white flex flex-col">
+      {/* Hero Header */}
+      <div className="bg-brand-dark pt-32 pb-20 px-4 md:px-10 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/about.webp')] bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/60 via-brand-dark/80 to-brand-dark"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
 
-      <div className="flex-1 bg-white flex flex-col">
-        {/* Hero Header */}
-        <div className="bg-brand-dark pt-32 pb-20 px-4 md:px-10 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/about.webp')] bg-cover bg-center opacity-20"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/60 via-brand-dark/80 to-brand-dark"></div>
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <a href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold group mb-6 transition-colors">
+            <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
+            Back to Home
+          </a>
+          <span className="block bg-brand-orange text-white px-2 py-1 text-[10px] font-bold uppercase tracking-widest w-fit mb-4">
+            Sole Talent
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4">
+            JOIN <span className="text-brand-orange">SOLECHEM</span>
+          </h1>
+          <p className="text-slate-400 max-w-2xl text-sm md:text-base leading-relaxed mb-8">
+            Be part of a fast-growing global chemical company. We're looking for talented professionals who want to make an impact in an industry that powers the world.
+          </p>
+          <div className="flex flex-wrap items-center gap-6">
+            <div className="flex items-center gap-2 text-white">
+              <Briefcase className="w-5 h-5 text-brand-orange" />
+              <span className="text-sm font-bold">{jobs.length} Open Positions</span>
+            </div>
+            <div className="flex items-center gap-2 text-white">
+              <Globe className="w-5 h-5 text-brand-orange" />
+              <span className="text-sm font-bold">50+ Countries</span>
+            </div>
+            <button
+              onClick={() => setApplyPosition('Spontaneous Application')}
+              className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20"
+            >
+              <Upload className="w-4 h-4" />
+              Upload Your CV
+            </button>
+          </div>
+        </div>
+      </div>
 
-          <div className="max-w-7xl mx-auto relative z-10">
-            <Link to="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold group mb-6 transition-colors">
-              <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
-              Back to Home
-            </Link>
-            <span className="block bg-brand-orange text-white px-2 py-1 text-[10px] font-bold uppercase tracking-widest w-fit mb-4">
-              Sole Talent
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4">
-              JOIN <span className="text-brand-orange">SOLECHEM</span>
-            </h1>
-            <p className="text-slate-400 max-w-2xl text-sm md:text-base leading-relaxed mb-8">
-              Be part of a fast-growing global chemical company. We're looking for talented professionals who want to make an impact in an industry that powers the world.
-            </p>
-            <div className="flex flex-wrap items-center gap-6">
-              <div className="flex items-center gap-2 text-white">
-                <Briefcase className="w-5 h-5 text-brand-orange" />
-                <span className="text-sm font-bold">{jobs.length} Open Positions</span>
+      {/* Why SoleChem */}
+      <section className="max-w-7xl mx-auto w-full px-4 md:px-10 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-brand-orange font-bold tracking-widest uppercase text-[10px] mb-4">Why SoleChem</h2>
+          <h3 className="text-3xl md:text-4xl font-black text-brand-dark leading-tight mb-4">
+            MORE THAN A JOB — A CAREER
+          </h3>
+          <p className="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
+            At SoleChem, you'll join a dynamic team at the intersection of chemistry, global trade, and innovation.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {benefits.map((b, i) => (
+            <motion.div
+              key={b.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
+              className="border border-slate-200 p-8 group hover:border-brand-orange/30 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="w-12 h-12 bg-brand-orange/10 flex items-center justify-center mb-5">
+                <b.icon className="w-6 h-6 text-brand-orange" />
               </div>
-              <div className="flex items-center gap-2 text-white">
-                <Globe className="w-5 h-5 text-brand-orange" />
-                <span className="text-sm font-bold">50+ Countries</span>
+              <h4 className="text-sm font-bold text-brand-dark mb-2 group-hover:text-brand-orange transition-colors">{b.title}</h4>
+              <p className="text-xs text-slate-500 leading-relaxed">{b.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Our Culture */}
+      <section className="bg-slate-50 border-y border-slate-200">
+        <div className="max-w-7xl mx-auto w-full px-4 md:px-10 py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-brand-orange font-bold tracking-widest uppercase text-[10px] mb-4">Our Culture</h2>
+              <h3 className="text-3xl md:text-4xl font-black text-brand-dark leading-tight mb-8">
+                WHERE TALENT MEETS OPPORTUNITY
+              </h3>
+              <div className="space-y-6">
+                {culturePoints.map((point, i) => (
+                  <motion.div
+                    key={point.title}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex gap-4"
+                  >
+                    <div className="w-8 h-8 bg-brand-orange/10 flex items-center justify-center shrink-0 mt-1">
+                      <span className="text-brand-orange font-black text-sm">{String(i + 1).padStart(2, '0')}</span>
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-brand-dark mb-1">{point.title}</h4>
+                      <p className="text-xs text-slate-500 leading-relaxed">{point.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-              <button
-                onClick={() => setApplyPosition('Spontaneous Application')}
-                className="flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 text-xs font-bold uppercase tracking-widest transition-colors border border-white/20"
-              >
-                <Upload className="w-4 h-4" />
-                Upload Your CV
-              </button>
+            </div>
+            <div className="relative">
+              <img src="/about.webp" alt="SoleChem team and office" className="w-full h-[400px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/30 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 bg-white shadow-xl border-l-4 border-brand-orange px-6 py-4">
+                <span className="text-2xl font-black text-brand-dark block">Since 2013</span>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Growing Together</span>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Why SoleChem */}
-        <section className="max-w-7xl mx-auto w-full px-4 md:px-10 py-20">
-          <div className="text-center mb-16">
-            <h2 className="text-brand-orange font-bold tracking-widest uppercase text-[10px] mb-4">Why SoleChem</h2>
-            <h3 className="text-3xl md:text-4xl font-black text-brand-dark leading-tight mb-4">
-              MORE THAN A JOB — A CAREER
-            </h3>
-            <p className="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
-              At SoleChem, you'll join a dynamic team at the intersection of chemistry, global trade, and innovation.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {benefits.map((b, i) => (
-              <motion.div
-                key={b.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
-                className="border border-slate-200 p-8 group hover:border-brand-orange/30 hover:shadow-lg transition-all duration-300"
-              >
-                <div className="w-12 h-12 bg-brand-orange/10 flex items-center justify-center mb-5">
-                  <b.icon className="w-6 h-6 text-brand-orange" />
-                </div>
-                <h4 className="text-sm font-bold text-brand-dark mb-2 group-hover:text-brand-orange transition-colors">{b.title}</h4>
-                <p className="text-xs text-slate-500 leading-relaxed">{b.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+      {/* Open Positions */}
+      <section className="max-w-7xl mx-auto w-full px-4 md:px-10 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-brand-orange font-bold tracking-widest uppercase text-[10px] mb-4">Open Positions</h2>
+          <h3 className="text-3xl md:text-4xl font-black text-brand-dark leading-tight mb-4">
+            FIND YOUR ROLE
+          </h3>
+          <p className="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
+            Explore our current openings and find the role that matches your skills and ambitions.
+          </p>
+        </div>
+        <div className="space-y-4">
+          {jobs.map(job => (
+            <JobCard key={job.id} job={job} onApply={setApplyPosition} />
+          ))}
+        </div>
 
-        {/* Our Culture */}
-        <section className="bg-slate-50 border-y border-slate-200">
-          <div className="max-w-7xl mx-auto w-full px-4 md:px-10 py-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-brand-orange font-bold tracking-widest uppercase text-[10px] mb-4">Our Culture</h2>
-                <h3 className="text-3xl md:text-4xl font-black text-brand-dark leading-tight mb-8">
-                  WHERE TALENT MEETS OPPORTUNITY
-                </h3>
-                <div className="space-y-6">
-                  {culturePoints.map((point, i) => (
-                    <motion.div
-                      key={point.title}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className="flex gap-4"
-                    >
-                      <div className="w-8 h-8 bg-brand-orange/10 flex items-center justify-center shrink-0 mt-1">
-                        <span className="text-brand-orange font-black text-sm">{String(i + 1).padStart(2, '0')}</span>
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-brand-dark mb-1">{point.title}</h4>
-                        <p className="text-xs text-slate-500 leading-relaxed">{point.desc}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-              <div className="relative">
-                <img src="/about.webp" alt="SoleChem team and office" className="w-full h-[400px] object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/30 to-transparent"></div>
-                <div className="absolute bottom-6 left-6 bg-white shadow-xl border-l-4 border-brand-orange px-6 py-4">
-                  <span className="text-2xl font-black text-brand-dark block">Since 2013</span>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Growing Together</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Open Positions */}
-        <section className="max-w-7xl mx-auto w-full px-4 md:px-10 py-20">
-          <div className="text-center mb-16">
-            <h2 className="text-brand-orange font-bold tracking-widest uppercase text-[10px] mb-4">Open Positions</h2>
-            <h3 className="text-3xl md:text-4xl font-black text-brand-dark leading-tight mb-4">
-              FIND YOUR ROLE
-            </h3>
-            <p className="text-slate-500 text-sm max-w-xl mx-auto leading-relaxed">
-              Explore our current openings and find the role that matches your skills and ambitions.
-            </p>
-          </div>
-          <div className="space-y-4">
-            {jobs.map(job => (
-              <JobCard key={job.id} job={job} onApply={setApplyPosition} />
-            ))}
-          </div>
-
-          {/* Spontaneous Application */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12 border-2 border-dashed border-slate-300 p-8 md:p-12 text-center bg-slate-50"
+        {/* Spontaneous Application */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 border-2 border-dashed border-slate-300 p-8 md:p-12 text-center bg-slate-50"
+        >
+          <h4 className="text-xl font-black text-brand-dark mb-3">Don't See Your Role?</h4>
+          <p className="text-sm text-slate-500 max-w-lg mx-auto leading-relaxed mb-6">
+            We're always looking for exceptional talent. Upload your CV and tell us how you can contribute to SoleChem's growth.
+          </p>
+          <button
+            onClick={() => setApplyPosition('Spontaneous Application')}
+            className="inline-flex items-center gap-2 bg-brand-dark hover:bg-black text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors"
           >
-            <h4 className="text-xl font-black text-brand-dark mb-3">Don't See Your Role?</h4>
-            <p className="text-sm text-slate-500 max-w-lg mx-auto leading-relaxed mb-6">
-              We're always looking for exceptional talent. Upload your CV and tell us how you can contribute to SoleChem's growth.
+            <Upload className="w-4 h-4" />
+            Upload CV & Apply
+          </button>
+        </motion.div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-brand-dark">
+        <div className="max-w-7xl mx-auto w-full px-4 md:px-10 py-20 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+          <div>
+            <h3 className="text-3xl md:text-4xl font-black text-white leading-tight mb-3">
+              READY TO JOIN US?
+            </h3>
+            <p className="text-slate-400 text-sm max-w-lg leading-relaxed">
+              Take the next step in your career. Join a global team that's shaping the future of chemical distribution.
             </p>
+          </div>
+          <div className="flex gap-4 shrink-0">
             <button
               onClick={() => setApplyPosition('Spontaneous Application')}
-              className="inline-flex items-center gap-2 bg-brand-dark hover:bg-black text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors"
+              className="bg-brand-orange hover:bg-brand-orange-hover text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2"
             >
-              <Upload className="w-4 h-4" />
-              Upload CV & Apply
+              Upload Your CV <ArrowRight className="w-4 h-4" />
             </button>
-          </motion.div>
-        </section>
-
-        {/* CTA */}
-        <section className="bg-brand-dark">
-          <div className="max-w-7xl mx-auto w-full px-4 md:px-10 py-20 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-            <div>
-              <h3 className="text-3xl md:text-4xl font-black text-white leading-tight mb-3">
-                READY TO JOIN US?
-              </h3>
-              <p className="text-slate-400 text-sm max-w-lg leading-relaxed">
-                Take the next step in your career. Join a global team that's shaping the future of chemical distribution.
-              </p>
-            </div>
-            <div className="flex gap-4 shrink-0">
-              <button
-                onClick={() => setApplyPosition('Spontaneous Application')}
-                className="bg-brand-orange hover:bg-brand-orange-hover text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2"
-              >
-                Upload Your CV <ArrowRight className="w-4 h-4" />
-              </button>
-              <Link
-                to="/about"
-                className="border border-white/20 hover:border-white/40 text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors"
-              >
-                About SoleChem
-              </Link>
-            </div>
+            <a
+              href="/about"
+              className="border border-white/20 hover:border-white/40 text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors"
+            >
+              About SoleChem
+            </a>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       {/* Application Modal */}
       {applyPosition && (
@@ -732,6 +670,6 @@ export function Careers() {
           onClose={() => setApplyPosition(null)}
         />
       )}
-    </>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
-import { useState, FormEvent } from 'react';
+import { useState } from 'react';
+import type { FormEvent } from 'react';
 import { X, Calendar, CheckCircle, Clock, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 

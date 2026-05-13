@@ -1,10 +1,7 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { ArrowLeft, FlaskConical, ShieldCheck, Leaf, Settings, Beaker, PackageCheck, Droplets, Award, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { QuoteModal } from '../components/QuoteModal';
-import { buildMetadata, buildCanonicalUrl, organizationSchema, buildBreadcrumbSchema } from '../utils/seo';
 
 const capabilities = [
   {
@@ -61,48 +58,7 @@ const certifications = [
 export function Manufacturing() {
   const [showQuote, setShowQuote] = useState(false);
 
-  const metadata = buildMetadata({
-    title: 'Toll Manufacturing & Contract Manufacturing Services | SoleChem',
-    description: 'Expert toll manufacturing, contract manufacturing, and custom formulations. ISO 9001 and GMP+ certified chemical manufacturing. Worldwide batch and continuous processes.',
-    canonical: buildCanonicalUrl('/manufacturing'),
-    ogImage: buildCanonicalUrl('/og-manufacturing.webp'),
-  });
-
-  const breadcrumb = buildBreadcrumbSchema([
-    { name: 'Home', url: buildCanonicalUrl('/') },
-    { name: 'Manufacturing', url: buildCanonicalUrl('/manufacturing') },
-  ]);
-
   return (
-    <>
-      <Helmet>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content="toll manufacturing, contract manufacturing, custom formulations, chemical manufacturing, GMP certified, ISO 9001" />
-        <link rel="canonical" href={metadata.canonical} />
-
-        {/* Open Graph Tags */}
-        <meta property="og:title" content={metadata.ogTitle} />
-        <meta property="og:description" content={metadata.ogDescription} />
-        <meta property="og:image" content={metadata.ogImage} />
-        <meta property="og:url" content={metadata.ogUrl} />
-        <meta property="og:type" content="website" />
-
-        {/* Twitter Card Tags */}
-        <meta name="twitter:title" content={metadata.twitterTitle} />
-        <meta name="twitter:description" content={metadata.twitterDescription} />
-        <meta name="twitter:image" content={metadata.ogImage} />
-        <meta name="twitter:card" content="summary_large_image" />
-
-        {/* JSON-LD Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(organizationSchema)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumb)}
-        </script>
-      </Helmet>
-
     <div className="flex-1 bg-white flex flex-col">
       {/* Hero */}
       <div className="relative bg-brand-dark pt-32 pb-20 px-4 md:px-10 overflow-hidden">
@@ -110,10 +66,10 @@ export function Manufacturing() {
         <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/40 via-brand-dark/60 to-brand-dark/80"></div>
 
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-start gap-4">
-          <Link to="/" className="text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group mb-4 transition-colors">
+          <a href="/" className="text-slate-400 hover:text-white uppercase tracking-widest text-[10px] font-bold flex items-center gap-2 group mb-4 transition-colors">
             <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
             Back to Home
-          </Link>
+          </a>
           <span className="inline-block bg-brand-orange text-white px-2 py-1 text-[10px] font-bold uppercase tracking-widest">
             Manufacturing
           </span>
@@ -260,12 +216,12 @@ export function Manufacturing() {
             >
               Request Quote <ArrowRight className="w-4 h-4" />
             </button>
-            <Link
-              to="/contact"
+            <a
+              href="/contact"
               className="border border-white/20 hover:border-white/40 text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors"
             >
               Contact
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -277,6 +233,5 @@ export function Manufacturing() {
         />
       )}
     </div>
-    </>
   );
 }

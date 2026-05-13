@@ -1,6 +1,4 @@
 import { useState, useMemo } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import {
   ChevronDown,
@@ -17,23 +15,8 @@ import {
   Mail,
 } from 'lucide-react';
 import { faqCategories, getAllFAQItems } from '../data/faq';
-import { buildMetadata, buildCanonicalUrl, buildBreadcrumbSchema, buildFAQSchema } from '../utils/seo';
-
-const meta = buildMetadata({
-  title: 'FAQ | SoleChem — Frequently Asked Questions',
-  description: 'Find answers to common questions about SoleChem products, ordering, shipping, quality, compliance, manufacturing services, and technical support.',
-  canonical: buildCanonicalUrl('/faq'),
-  ogType: 'website',
-  keywords: 'SoleChem FAQ, chemical supplier FAQ, REACH compliance, COA, SDS, B2B chemicals, toll manufacturing, chemical shipping',
-});
-
-const breadcrumb = buildBreadcrumbSchema([
-  { name: 'Home', url: 'https://solechem.com' },
-  { name: 'FAQ', url: 'https://solechem.com/faq' },
-]);
 
 const allFaqItems = getAllFAQItems();
-const faqSchema = buildFAQSchema(allFaqItems);
 
 const categoryIcons: Record<string, typeof Building2> = {
   building: Building2,
@@ -79,21 +62,6 @@ export function FAQ() {
 
   return (
     <>
-      <Helmet>
-        <title>{meta.title}</title>
-        <meta name="description" content={meta.description} />
-        <meta name="keywords" content={meta.keywords} />
-        <link rel="canonical" href={meta.canonical} />
-        <meta property="og:title" content={meta.ogTitle} />
-        <meta property="og:description" content={meta.ogDescription} />
-        <meta property="og:type" content={meta.ogType} />
-        <meta property="og:url" content={meta.canonical} />
-        <meta name="twitter:title" content={meta.twitterTitle} />
-        <meta name="twitter:description" content={meta.twitterDescription} />
-        <script type="application/ld+json">{JSON.stringify(breadcrumb)}</script>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
-
       {/* Hero */}
       <section className="bg-brand-dark text-white pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
@@ -312,12 +280,12 @@ export function FAQ() {
             Our team of experts is available to answer any question about our products, services, or capabilities. We guarantee a response within 24 hours.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/contact"
+            <a
+              href="/contact"
               className="bg-brand-orange hover:bg-brand-orange-hover text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2"
             >
               Contact Our Team <ArrowRight className="w-4 h-4" />
-            </Link>
+            </a>
             <a
               href="mailto:info@solechem.com"
               className="border border-white/20 hover:border-white/40 text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-colors"

@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Categories } from '../views/Categories';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Categories', url: buildCanonicalUrl('/categories') },
+]);
+---
+
+<Layout
+  title="Chemical Categories | Browse by Product Type | SoleChem"
+  description="Browse our chemical products by category. 27 categories including acids, solvents, polymers, pigments, and more."
+  canonical={buildCanonicalUrl('/categories')}
+  jsonLd={[breadcrumb]}
+>
+  <Categories client:load />
+</Layout>

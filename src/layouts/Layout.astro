@@ -1,0 +1,76 @@
+---
+import '../index.css';
+import { Navbar } from '../components/Navbar';
+import { Footer } from '../components/Footer';
+import { CookieConsent } from '../components/CookieConsent';
+import { ExitIntentPopup } from '../components/ExitIntentPopup';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  jsonLd?: object[];
+  keywords?: string;
+  robots?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  ogType = 'website',
+  jsonLd = [],
+  keywords,
+  robots,
+} = Astro.props;
+
+const siteUrl = 'https://solechem.com';
+const currentUrl = canonical || `${siteUrl}${Astro.url.pathname}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    {robots && <meta name="robots" content={robots} />}
+    <link rel="canonical" href={currentUrl} />
+
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1F2937" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={currentUrl} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    {jsonLd.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+  </head>
+  <body>
+    <div class="min-h-screen bg-white font-sans flex flex-col text-slate-900">
+      <Navbar client:load />
+      <main class="flex-1 flex flex-col">
+        <slot />
+      </main>
+      <Footer />
+      <CookieConsent client:idle />
+      <ExitIntentPopup client:idle />
+    </div>
+  </body>
+</html>

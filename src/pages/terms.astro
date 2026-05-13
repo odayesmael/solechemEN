@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Terms } from '../views/Terms';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+
+const breadcrumb = buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Terms of Service', url: buildCanonicalUrl('/terms') },
+]);
+---
+
+<Layout
+  title="Terms of Service | SoleChem"
+  description="SoleChem terms of service. Read our terms and conditions governing the use of our website and services."
+  canonical={buildCanonicalUrl('/terms')}
+  jsonLd={[breadcrumb]}
+>
+  <Terms />
+</Layout>

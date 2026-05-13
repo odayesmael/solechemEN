@@ -1,9 +1,7 @@
 import { ArrowRight } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
 import { industries } from '../data/industries';
 
 export function IndustriesBlock() {
-  const navigate = useNavigate();
 
   return (
     <section id="industries" className="bg-white flex flex-col py-16 px-8 md:px-16 border-b border-slate-200">
@@ -17,17 +15,17 @@ export function IndustriesBlock() {
               KEY INDUSTRIES <br className="hidden md:block"/> WE SERVE
             </h3>
           </div>
-          <Link to="/industries" className="flex items-center gap-2 text-slate-500 hover:text-brand-orange font-bold uppercase tracking-widest text-xs transition-colors group">
+          <a href="/industries" className="flex items-center gap-2 text-slate-500 hover:text-brand-orange font-bold uppercase tracking-widest text-xs transition-colors group">
             Explore All 20 Industries
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </a>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-8">
           {industries.slice(0, 12).map((ind) => (
             <div 
               key={ind.name}
-              onClick={() => navigate(`/catalog?industry=${encodeURIComponent(ind.name)}`)}
+              onClick={() => window.location.href = `/catalog?industry=${encodeURIComponent(ind.name)}`}
               className="group flex flex-col gap-3 cursor-pointer"
             >
               <div className="w-full relative aspect-[4/3] overflow-hidden bg-slate-100 rounded-sm">
