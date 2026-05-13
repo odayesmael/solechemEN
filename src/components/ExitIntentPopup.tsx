@@ -60,7 +60,7 @@ export function ExitIntentPopup() {
     timeout = setTimeout(() => {
       document.addEventListener('mouseleave', handleMouseLeave);
       document.addEventListener('visibilitychange', handleVisibility);
-    }, 5000);
+    }, 1000);
 
     return () => {
       clearTimeout(timeout);
