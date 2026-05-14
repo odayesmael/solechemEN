@@ -53,7 +53,7 @@ export function Blog() {
       <section className="max-w-7xl mx-auto px-6 md:px-10 -mt-10 relative z-10 mb-16">
         <div data-animate>
           <a
-            to={`/blog/${featured.slug}`}
+            href={`/blog/${featured.slug}`}
             className="group block bg-white border border-slate-200 shadow-lg hover:shadow-xl transition-all overflow-hidden"
           >
             <div className="grid md:grid-cols-2">
@@ -148,7 +148,7 @@ export function Blog() {
                 data-delay={i * 80}
               >
                 <a
-                  to={`/blog/${article.slug}`}
+                  href={`/blog/${article.slug}`}
                   className="group block bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all h-full flex flex-col"
                 >
                   <div className="aspect-[16/10] overflow-hidden">

@@ -146,7 +146,7 @@ export function ProductDetails({ product }: { product: any }) {
                   {product.relatedProducts.map((rp: any) => (
                     <a
                       key={rp.cas}
-                      to={`/products/cas-${rp.cas}`}
+                      href={`/products/cas-${rp.cas}`}
                       className="bg-white border border-slate-200 p-4 hover:border-brand-orange transition-colors group flex justify-between items-center"
                     >
                       <div>
@@ -205,7 +205,7 @@ export function ProductDetails({ product }: { product: any }) {
                   ? product.industry.map((ind: string, i: number) => (
                       <a
                         key={i}
-                        to={`/catalog?industry=${encodeURIComponent(ind)}`}
+                        href={`/catalog?industry=${encodeURIComponent(ind)}`}
                         className="bg-white border border-slate-200 px-4 py-2 text-xs font-bold text-brand-dark uppercase tracking-widest hover:border-brand-orange hover:text-brand-orange transition-colors"
                       >
                         {ind}

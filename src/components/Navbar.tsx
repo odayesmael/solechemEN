@@ -204,7 +204,7 @@ export function Navbar() {
                   {categories.map((cat) => (
                     <a
                       key={cat.name}
-                      to={`/catalog?category=${encodeURIComponent(cat.name)}`}
+                      href={`/catalog?category=${encodeURIComponent(cat.name)}`}
                       onClick={() => setActiveMega(null)}
                       className="flex items-center gap-3 py-2.5 px-3 -mx-3 rounded-sm hover:bg-slate-50 group transition-colors"
                     >
@@ -269,7 +269,7 @@ export function Navbar() {
                   {industries.map((ind) => (
                     <a
                       key={ind.name}
-                      to={`/catalog?industry=${encodeURIComponent(ind.name)}`}
+                      href={`/catalog?industry=${encodeURIComponent(ind.name)}`}
                       onClick={() => setActiveMega(null)}
                       className="flex items-center gap-3 py-2.5 px-3 -mx-3 rounded-sm hover:bg-slate-50 group transition-colors"
                     >
