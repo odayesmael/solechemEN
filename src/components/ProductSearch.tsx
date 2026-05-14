@@ -18,7 +18,7 @@ export function ProductSearch() {
   return (
     <section className="bg-slate-50 py-24 border-b border-slate-200">
       <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-        <div className="mb-12">
+        <div data-animate className="mb-12">
           <span className="inline-block bg-brand-orange text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
              Extensive Catalog
           </span>

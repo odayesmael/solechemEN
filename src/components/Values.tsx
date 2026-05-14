@@ -33,7 +33,7 @@ export function Values() {
     <section className="py-24 bg-white border-b border-slate-200 relative overflow-hidden">
       <MoleculeMotif variant="circles" intensity="medium" position="bottom-left" animated={true} />
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20 border-l-4 border-brand-orange pl-6 text-left">
+        <div data-animate className="text-center max-w-3xl mx-auto mb-20 border-l-4 border-brand-orange pl-6 text-left">
           <h2 className="text-brand-orange font-bold tracking-widest uppercase text-xs mb-4">
             Why SoleChem
           </h2>
@@ -49,6 +49,8 @@ export function Values() {
           {limits.map((val, i) => (
             <div
               key={i}
+              data-animate
+              data-delay={i * 100}
               className="bg-white p-8 md:p-12 border-b border-r border-slate-200 hover:bg-slate-50 transition-colors group relative"
             >
               <div className="absolute top-8 right-8 text-text-tertiary text-6xl font-black opacity-40 group-hover:text-accent-blue/20 transition-colors">

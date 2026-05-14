@@ -14,7 +14,7 @@ export function ManufacturingTeaser() {
       <MoleculeMotif variant="orbits" intensity="prominent" position="center" animated={true} />
       <div className="max-w-7xl mx-auto px-4 md:px-10 py-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="relative z-20">
+          <div data-animate="left" className="relative z-20">
             <h2 className="text-brand-orange font-bold tracking-widest uppercase text-xs mb-4">
               Manufacturing Services
             </h2>
@@ -33,7 +33,7 @@ export function ManufacturingTeaser() {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 relative z-20">
+          <div data-animate="right" data-delay="200" className="grid grid-cols-2 gap-4 relative z-20">
             {features.map((f, i) => (
               <div
                 key={f.label}

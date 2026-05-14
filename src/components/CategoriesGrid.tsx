@@ -5,7 +5,7 @@ export function CategoriesGrid() {
   return (
     <section id="categories" className="bg-slate-50 flex flex-col border-b border-slate-200">
       <div className="p-8 md:p-16 border-b border-slate-200 flex flex-col md:flex-row md:items-end justify-between gap-6 bg-white">
-        <div>
+        <div data-animate>
           <h2 className="text-brand-orange font-bold tracking-widest uppercase text-xs mb-4">
             Browse by Category
           </h2>

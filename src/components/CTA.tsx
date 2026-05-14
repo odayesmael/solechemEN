@@ -18,7 +18,7 @@ export function CTA() {
               backgroundPosition: 'center'
             }}
           ></div>
-          <div>
+          <div data-animate="left">
             <span className="text-xs font-bold text-accent-blue uppercase tracking-widest mb-4 block">
               GLOBAL PRESENCE
             </span>
@@ -38,7 +38,7 @@ export function CTA() {
             ))}
           </div>
 
-          <div className="flex flex-col w-full max-w-sm gap-4 z-10">
+          <div data-animate="right" data-delay="200" className="flex flex-col w-full max-w-sm gap-4 z-10">
             <button
               onClick={() => setShowQuote(true)}
               className="bg-brand-orange text-white w-full py-6 text-sm font-black uppercase tracking-widest hover:bg-brand-orange-hover transition-colors border border-brand-orange"

@@ -6,6 +6,7 @@ export function About() {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div
+            data-animate="left"
             className="mb-8 lg:mb-0 relative"
           >
             <div className="absolute inset-0 bg-brand-orange transform -translate-x-4 translate-y-4"></div>
@@ -15,7 +16,7 @@ export function About() {
               className="relative z-10 w-full h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
           </div>
-          <div>
+          <div data-animate="right" data-delay="200">
             <span className="inline-block bg-brand-orange text-white px-3 py-1 text-xs font-bold uppercase tracking-widest mb-6">
                About SoleChem
             </span>

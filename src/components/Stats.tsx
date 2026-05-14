@@ -12,9 +12,11 @@ export function Stats() {
     <section className="bg-slate-100 border-b border-slate-200 relative overflow-hidden">
       <MoleculeMotif variant="atoms" intensity="subtle" position="top-left" animated={true} />
       <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 relative z-10">
-        {stats.map((stat) => (
+        {stats.map((stat, i) => (
           <div
             key={stat.label}
+            data-animate
+            data-delay={i * 100}
             className="p-8 md:p-12 text-center border-b lg:border-b-0 border-r border-slate-200 last:border-r-0"
           >
             <div className="text-3xl md:text-5xl font-black text-brand-dark mb-2">{stat.value}</div>

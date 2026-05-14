@@ -12,6 +12,7 @@ export function Hero() {
 
       <div className="w-full md:w-1/2 p-8 md:p-16 lg:p-20 flex flex-col justify-center z-10">
         <div
+          data-animate
           className="self-start inline-flex items-center gap-2 text-xs text-white font-bold uppercase tracking-widest mb-6"
         >
           <span className="w-8 h-px bg-brand-orange"></span>
@@ -19,6 +20,7 @@ export function Hero() {
         </div>
 
         <h1
+          data-animate data-delay="100"
           className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight tracking-tight mb-6"
         >
           YOUR GLOBAL<br />
@@ -27,12 +29,14 @@ export function Hero() {
         </h1>
 
         <p
+          data-animate data-delay="200"
           className="text-light text-base md:text-lg max-w-md mb-10 leading-relaxed"
         >
           Sourcing, manufacturing, and delivering high-purity chemicals tailored to your industry's exact requirements.
         </p>
 
         <div
+          data-animate data-delay="300"
           className="flex flex-col sm:flex-row gap-3"
         >
           <a href="/catalog" className="bg-brand-orange text-white px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-brand-orange-hover transition-colors flex items-center justify-center gap-2 group">
@@ -58,6 +62,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-l from-transparent to-brand-dark/30"></div>
 
         <div
+          data-animate data-delay="400"
           className="absolute bottom-8 left-8 bg-white shadow-2xl border-l-4 border-brand-orange"
         >
           <div className="px-6 pt-5 pb-3">
