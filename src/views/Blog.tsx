@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+
 import { ArrowRight, Calendar, Clock, User, BookOpen, Search } from 'lucide-react';
 import { blogArticles, blogCategories } from '../data/blog';
 
@@ -31,11 +31,7 @@ export function Blog() {
       {/* Hero */}
       <section className="bg-brand-dark text-white pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div data-animate>
             <div className="flex items-center gap-2 mb-4">
               <BookOpen className="w-5 h-5 text-brand-orange" />
               <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">
@@ -49,17 +45,13 @@ export function Blog() {
             <p className="text-lg text-slate-400 max-w-2xl leading-relaxed">
               Expert guides, compliance updates, and industry insights for B2B chemical buyers. Stay informed with practical knowledge from SoleChem's technical team.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Featured Article */}
       <section className="max-w-7xl mx-auto px-6 md:px-10 -mt-10 relative z-10 mb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-        >
+        <div data-animate>
           <a
             to={`/blog/${featured.slug}`}
             className="group block bg-white border border-slate-200 shadow-lg hover:shadow-xl transition-all overflow-hidden"
@@ -103,7 +95,7 @@ export function Blog() {
               </div>
             </div>
           </a>
-        </motion.div>
+        </div>
       </section>
 
       {/* Filters & Search */}
@@ -150,12 +142,10 @@ export function Blog() {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filtered.map((article, i) => (
-              <motion.div
+              <div
                 key={article.slug}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                data-animate
+                data-delay={i * 80}
               >
                 <a
                   to={`/blog/${article.slug}`}
@@ -194,7 +184,7 @@ export function Blog() {
                     </div>
                   </div>
                 </a>
-              </motion.div>
+              </div>
             ))}
           </div>
         )}

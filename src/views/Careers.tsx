@@ -396,10 +396,8 @@ function JobCard({ job, onApply }: { job: Job; onApply: (title: string) => void 
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+    <div
+      data-animate
       className="border border-slate-200 bg-white hover:border-brand-orange/30 hover:shadow-lg transition-all duration-300"
     >
       <div
@@ -472,7 +470,7 @@ function JobCard({ job, onApply }: { job: Job; onApply: (title: string) => void 
           </div>
         </div>
       )}
-    </motion.div>
+    </div>
   );
 }
 
@@ -537,12 +535,10 @@ export function Careers() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((b, i) => (
-            <motion.div
+            <div
               key={b.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.5 }}
+              data-animate
+              data-delay={i * 80}
               className="border border-slate-200 p-8 group hover:border-brand-orange/30 hover:shadow-lg transition-all duration-300"
             >
               <div className="w-12 h-12 bg-brand-orange/10 flex items-center justify-center mb-5">
@@ -550,7 +546,7 @@ export function Careers() {
               </div>
               <h4 className="text-sm font-bold text-brand-dark mb-2 group-hover:text-brand-orange transition-colors">{b.title}</h4>
               <p className="text-xs text-slate-500 leading-relaxed">{b.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -566,12 +562,10 @@ export function Careers() {
               </h3>
               <div className="space-y-6">
                 {culturePoints.map((point, i) => (
-                  <motion.div
+                  <div
                     key={point.title}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
+                    data-animate="left"
+                    data-delay={i * 100}
                     className="flex gap-4"
                   >
                     <div className="w-8 h-8 bg-brand-orange/10 flex items-center justify-center shrink-0 mt-1">
@@ -581,7 +575,7 @@ export function Careers() {
                       <h4 className="text-sm font-bold text-brand-dark mb-1">{point.title}</h4>
                       <p className="text-xs text-slate-500 leading-relaxed">{point.desc}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -615,10 +609,8 @@ export function Careers() {
         </div>
 
         {/* Spontaneous Application */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
+          data-animate
           className="mt-12 border-2 border-dashed border-slate-300 p-8 md:p-12 text-center bg-slate-50"
         >
           <h4 className="text-xl font-black text-brand-dark mb-3">Don't See Your Role?</h4>
@@ -632,7 +624,7 @@ export function Careers() {
             <Upload className="w-4 h-4" />
             Upload CV & Apply
           </button>
-        </motion.div>
+        </div>
       </section>
 
       {/* CTA */}

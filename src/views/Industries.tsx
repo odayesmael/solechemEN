@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { industries } from '../data/industries';
 
@@ -24,10 +23,9 @@ export function Industries() {
       <div className="max-w-7xl mx-auto w-full px-4 md:px-10 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
           {industries.map((ind, i) => (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.03, duration: 0.5 }}
+            <div
+              data-animate
+              data-delay={i * 30}
               key={ind.name}
               onClick={() => { window.location.href = `/catalog?industry=${encodeURIComponent(ind.name)}`; }}
               className="group flex flex-col gap-5 cursor-pointer"
@@ -50,7 +48,7 @@ export function Industries() {
                 </div>
                 <div className="w-full h-px bg-slate-200 scale-x-100 origin-left transition-transform duration-300 group-hover:bg-brand-orange/50"></div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

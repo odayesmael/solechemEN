@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { motion } from 'motion/react';
 import { ArrowLeft, Phone, Mail, MapPin, Clock, Globe, Shield, FlaskConical, Send, CheckCircle } from 'lucide-react';
 
 const enquiryTypes = ['RFQ / Pricing', 'Custom Formulation', 'Supply Agreement', 'Toll Manufacturing', 'Sample Request'];
@@ -68,9 +67,8 @@ export function Contact() {
           {/* Form */}
           <div className="lg:col-span-2 border border-slate-200 p-6 md:p-10">
             {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
+              <div
+                data-animate="fade"
                 className="py-20 flex flex-col items-center text-center gap-4"
               >
                 <CheckCircle className="w-16 h-16 text-green-500" />
@@ -81,7 +79,7 @@ export function Contact() {
                 <button onClick={() => { setSubmitted(false); setForm({ name: '', jobTitle: '', company: '', vat: '', email: '', phone: '', enquiryType: '', requirements: '', nda: false }); }} className="mt-4 bg-brand-dark hover:bg-black text-white px-8 py-3 text-xs font-bold uppercase tracking-widest transition-colors">
                   New Enquiry
                 </button>
-              </motion.div>
+              </div>
             ) : (
               <form onSubmit={handleSubmit}>
                 {/* Contact Info */}

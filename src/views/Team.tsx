@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, Linkedin, Mail, Globe, Award, Users, Briefcase } from 'lucide-react';
 
 interface TeamMember {
@@ -110,10 +109,8 @@ function getDeptColor(dept: string) {
 
 function MemberCard({ member, featured = false }: { member: TeamMember; featured?: boolean }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+    <div
+      data-animate
       className={`border border-slate-200 bg-white hover:border-brand-orange/30 hover:shadow-lg transition-all duration-300 group ${featured ? 'p-8 md:p-10' : 'p-6 md:p-8'}`}
     >
       <div className={`flex ${featured ? 'flex-col md:flex-row gap-8' : 'flex-col gap-5'}`}>
@@ -174,7 +171,7 @@ function MemberCard({ member, featured = false }: { member: TeamMember; featured
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -205,16 +202,15 @@ export function Team() {
           {/* Stats Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
             {stats.map((stat, i) => (
-              <motion.div
+              <div
                 key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.1 }}
+                data-animate
+                data-delay={300 + i * 100}
                 className="bg-brand-dark/80 backdrop-blur-sm p-6 text-center"
               >
                 <span className="text-3xl md:text-4xl font-black text-white block">{stat.value}</span>
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 block">{stat.label}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -283,10 +279,8 @@ export function Team() {
           </h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
+            data-animate
             className="border border-slate-200 p-8 text-center hover:border-brand-orange/30 hover:shadow-lg transition-all"
           >
             <Globe className="w-10 h-10 text-brand-orange mx-auto mb-5" />
@@ -294,12 +288,10 @@ export function Team() {
             <p className="text-xs text-slate-500 leading-relaxed">
               12 nationalities across our team bring local market knowledge to a global operation spanning 50+ countries.
             </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
+          </div>
+          <div
+            data-animate
+            data-delay={100}
             className="border border-slate-200 p-8 text-center hover:border-brand-orange/30 hover:shadow-lg transition-all"
           >
             <Award className="w-10 h-10 text-brand-orange mx-auto mb-5" />
@@ -307,12 +299,10 @@ export function Team() {
             <p className="text-xs text-slate-500 leading-relaxed">
               Our team combines deep chemical knowledge with commercial and technical expertise across 20 industry verticals.
             </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+          </div>
+          <div
+            data-animate
+            data-delay={200}
             className="border border-slate-200 p-8 text-center hover:border-brand-orange/30 hover:shadow-lg transition-all"
           >
             <Users className="w-10 h-10 text-brand-orange mx-auto mb-5" />
@@ -320,7 +310,7 @@ export function Team() {
             <p className="text-xs text-slate-500 leading-relaxed">
               We communicate fluently in English, Italian, German, and French — ensuring seamless interactions with clients worldwide.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, Search } from 'lucide-react';
 import { categories } from '../data/categories';
 
@@ -53,10 +52,9 @@ export function Categories() {
       <div className="max-w-7xl mx-auto w-full px-4 md:px-10 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
           {filteredCategories.map((cat, i) => (
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.02, duration: 0.5 }}
+            <div
+              data-animate
+              data-delay={i * 20}
               key={cat.name}
               onClick={() => { window.location.href = `/catalog?category=${encodeURIComponent(cat.name)}`; }}
               className="group flex flex-col gap-5 cursor-pointer"
@@ -79,7 +77,7 @@ export function Categories() {
                 </div>
                 <div className="w-full h-px bg-slate-200 scale-x-100 origin-left transition-transform duration-300 group-hover:bg-brand-orange/50"></div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 

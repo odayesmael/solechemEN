@@ -111,11 +111,7 @@ export function BlogArticle({ slug }: { slug: string }) {
       {/* Hero */}
       <section className="bg-brand-dark text-white pt-32 pb-16">
         <div className="max-w-4xl mx-auto px-6 md:px-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div data-animate>
             {/* Back link */}
             <a
               href="/blog"
@@ -149,16 +145,14 @@ export function BlogArticle({ slug }: { slug: string }) {
                 {article.readTime}
               </span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Featured Image */}
       <div className="max-w-4xl mx-auto px-6 md:px-10 -mt-8 relative z-10 mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+        <div
+          data-animate
           className="aspect-[2/1] overflow-hidden border border-slate-200 shadow-lg"
         >
           <img
@@ -166,15 +160,13 @@ export function BlogArticle({ slug }: { slug: string }) {
             alt={article.title}
             className="w-full h-full object-cover"
           />
-        </motion.div>
+        </div>
       </div>
 
       {/* Article Content */}
       <article className="max-w-4xl mx-auto px-6 md:px-10 pb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+        <div
+          data-animate
           className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-12"
         >
           {/* Main content */}
@@ -238,7 +230,7 @@ export function BlogArticle({ slug }: { slug: string }) {
               </div>
             </div>
           </aside>
-        </motion.div>
+        </div>
       </article>
 
       {/* FAQ Section */}
@@ -281,12 +273,10 @@ export function BlogArticle({ slug }: { slug: string }) {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {related.map((rel, i) => (
-                <motion.div
+                <div
                   key={rel.slug}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  data-animate
+                  data-delay={i * 100}
                 >
                   <a
                     href={`/blog/${rel.slug}`}
@@ -314,7 +304,7 @@ export function BlogArticle({ slug }: { slug: string }) {
                       </div>
                     </div>
                   </a>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

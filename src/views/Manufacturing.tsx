@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
 import { ArrowLeft, FlaskConical, ShieldCheck, Leaf, Settings, Beaker, PackageCheck, Droplets, Award, ArrowRight } from 'lucide-react';
 import { QuoteModal } from '../components/QuoteModal';
 
@@ -110,18 +109,16 @@ export function Manufacturing() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {capabilities.map((cap, i) => (
-              <motion.div
+              <div
                 key={cap.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
+                data-animate
+                data-delay={i * 100}
                 className="bg-slate-50 border border-slate-200 p-6 group hover:border-brand-orange/30 hover:bg-brand-orange/5 transition-colors"
               >
                 <cap.icon className="w-8 h-8 text-brand-orange mb-4" />
                 <h4 className="text-sm font-bold text-brand-dark mb-2">{cap.title}</h4>
                 <p className="text-xs text-slate-500 leading-relaxed">{cap.description}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -141,12 +138,10 @@ export function Manufacturing() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((service, i) => (
-              <motion.div
+              <div
                 key={service.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
+                data-animate
+                data-delay={i * 100}
                 className="bg-white border border-slate-200 p-8 group hover:shadow-lg hover:border-brand-orange/20 transition-all duration-300"
               >
                 <div className="flex items-start gap-5">
@@ -160,7 +155,7 @@ export function Manufacturing() {
                     <p className="text-sm text-slate-500 leading-relaxed">{service.description}</p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -182,18 +177,16 @@ export function Manufacturing() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {certifications.map((cert, i) => (
-            <motion.div
+            <div
               key={cert.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              data-animate
+              data-delay={i * 100}
               className="text-center p-8 border border-slate-200 bg-white group hover:border-brand-orange/30 transition-colors"
             >
               <Award className="w-10 h-10 text-brand-orange mx-auto mb-5" />
               <h4 className="text-xl font-black text-brand-dark mb-2">{cert.title}</h4>
               <p className="text-sm text-slate-500">{cert.subtitle}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>

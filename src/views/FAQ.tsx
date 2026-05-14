@@ -65,11 +65,7 @@ export function FAQ() {
       {/* Hero */}
       <section className="bg-brand-dark text-white pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div data-animate>
             <div className="flex items-center gap-2 mb-4">
               <HelpCircle className="w-5 h-5 text-brand-orange" />
               <span className="text-xs font-bold uppercase tracking-widest text-brand-orange">
@@ -98,7 +94,7 @@ export function FAQ() {
                 className="w-full pl-12 pr-4 py-4 bg-white/10 border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-brand-orange focus:bg-white/15 transition-all"
               />
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -174,12 +170,10 @@ export function FAQ() {
             {filteredCategories.map((cat, catIdx) => {
               const Icon = categoryIcons[cat.icon] || HelpCircle;
               return (
-                <motion.div
+                <div
                   key={cat.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.4, delay: catIdx * 0.05 }}
+                  data-animate
+                  data-delay={catIdx * 50}
                 >
                   {/* Category Header */}
                   <div className="flex items-center gap-3 mb-2">
@@ -240,7 +234,7 @@ export function FAQ() {
                       );
                     })}
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>

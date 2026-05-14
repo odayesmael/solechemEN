@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+
 import { ArrowLeft, ArrowRight, CheckCircle2, Globe, Factory, Award, ShieldCheck, MapPin, Target, Handshake, Leaf, Sparkles } from 'lucide-react';
 import { QuoteModal } from '../components/QuoteModal';
 
@@ -71,16 +71,15 @@ export function About() {
           {/* Stats Row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10">
             {stats.map((stat, i) => (
-              <motion.div
+              <div
                 key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.1 }}
+                data-animate
+                data-delay={i * 100}
                 className="bg-brand-dark/80 backdrop-blur-sm p-6 text-center"
               >
                 <span className="text-3xl md:text-4xl font-black text-white block">{stat.value}</span>
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 block">{stat.label}</span>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -127,12 +126,10 @@ export function About() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((val, i) => (
-              <motion.div
+              <div
                 key={val.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
+                data-animate
+                data-delay={i * 100}
                 className="bg-white border border-slate-200 p-8 group hover:border-brand-orange/30 hover:shadow-lg transition-all duration-300"
               >
                 <div className="w-12 h-12 bg-brand-orange/10 flex items-center justify-center mb-5">
@@ -140,7 +137,7 @@ export function About() {
                 </div>
                 <h4 className="text-sm font-bold text-brand-dark mb-2 group-hover:text-brand-orange transition-colors">{val.title}</h4>
                 <p className="text-xs text-slate-500 leading-relaxed">{val.desc}</p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -159,19 +156,17 @@ export function About() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {certifications.map((cert, i) => (
-            <motion.div
+            <div
               key={cert.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
+              data-animate
+              data-delay={i * 100}
               className="border border-slate-200 p-8 group hover:border-brand-orange/30 transition-colors"
             >
               <Award className="w-10 h-10 text-brand-orange mb-5" />
               <h4 className="text-xl font-black text-brand-dark mb-1">{cert.title}</h4>
               <p className="text-xs font-bold text-brand-orange uppercase tracking-widest mb-4">{cert.subtitle}</p>
               <p className="text-sm text-slate-500 leading-relaxed">{cert.desc}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
