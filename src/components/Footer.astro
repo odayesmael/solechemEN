@@ -1,0 +1,99 @@
+---
+import { MapPin, Phone, Mail, Linkedin } from 'lucide-react';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-brand-dark text-slate-400">
+  <div class="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+  <div class="max-w-7xl mx-auto px-6 md:px-10 pt-16 pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+
+      <div class="lg:col-span-4">
+        <a href="/" class="inline-block mb-6">
+          <img
+            src="/logo-footer.png"
+            alt="SoleChem"
+            class="h-10 w-auto"
+          />
+        </a>
+        <p class="text-sm leading-relaxed text-slate-400 max-w-xs mb-8">
+          Your global chemical partner providing top-tier manufacturing, fast logistics, and exceptional technical support to 50+ countries since 2013.
+        </p>
+        <div class="flex gap-3">
+          <a href="https://linkedin.com/company/solechem" target="_blank" rel="noopener noreferrer" class="w-9 h-9 border border-white/10 flex items-center justify-center hover:bg-brand-orange hover:border-brand-orange hover:text-white transition-all text-slate-500">
+            <Linkedin className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2">
+        <h4 class="text-white text-xs font-bold uppercase tracking-widest mb-6">Company</h4>
+        <ul class="space-y-3">
+          <li><a href="/about" class="text-sm hover:text-brand-orange transition-colors">About Us</a></li>
+          <li><a href="/team" class="text-sm hover:text-brand-orange transition-colors">Our Team</a></li>
+          <li><a href="/manufacturing" class="text-sm hover:text-brand-orange transition-colors">Manufacturing</a></li>
+          <li><a href="/careers" class="text-sm hover:text-brand-orange transition-colors">Sole Talent</a></li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-2">
+        <h4 class="text-white text-xs font-bold uppercase tracking-widest mb-6">Products</h4>
+        <ul class="space-y-3">
+          <li><a href="/catalog" class="text-sm hover:text-brand-orange transition-colors">Product Catalog</a></li>
+          <li><a href="/categories" class="text-sm hover:text-brand-orange transition-colors">By Category</a></li>
+          <li><a href="/industries" class="text-sm hover:text-brand-orange transition-colors">By Industry</a></li>
+          <li><a href="/blog" class="text-sm hover:text-brand-orange transition-colors">Blog & Insights</a></li>
+          <li><a href="/faq" class="text-sm hover:text-brand-orange transition-colors">FAQ</a></li>
+          <li><a href="/contact" class="text-sm hover:text-brand-orange transition-colors">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="lg:col-span-4">
+        <h4 class="text-white text-xs font-bold uppercase tracking-widest mb-6">Contact Us</h4>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <MapPin className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
+            <span class="text-sm">Via Cassina de' Pecchi, 12<br />20060 Cassina de' Pecchi (MI), Italy</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <Phone className="w-4 h-4 text-brand-orange shrink-0" />
+            <span class="text-sm">+39 02 3055 6150</span>
+          </li>
+          <li class="flex items-center gap-3">
+            <Mail className="w-4 h-4 text-brand-orange shrink-0" />
+            <span class="text-sm">info@solechem.com</span>
+          </li>
+        </ul>
+
+        <div class="mt-8 bg-white/5 border border-white/10 p-4 flex items-center justify-between">
+          <div>
+            <div class="text-white text-sm font-black tracking-wide">ISO 9001:2015</div>
+            <div class="text-xs font-bold text-brand-orange uppercase tracking-widest mt-0.5">Certified Quality</div>
+          </div>
+          <div class="w-px h-8 bg-slate-700"></div>
+          <div>
+            <div class="text-white text-sm font-black tracking-wide">REACH</div>
+            <div class="text-xs font-bold text-brand-orange uppercase tracking-widest mt-0.5">Compliant</div>
+          </div>
+          <div class="w-px h-8 bg-slate-700"></div>
+          <div>
+            <div class="text-white text-sm font-black tracking-wide">GMP</div>
+            <div class="text-xs font-bold text-brand-orange uppercase tracking-widest mt-0.5">Certified</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10/50">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 h-14 flex flex-col md:flex-row items-center justify-between text-xs font-medium text-slate-500 uppercase tracking-widest">
+      <div>&copy; {currentYear} SoleChem Europe S.r.l. &mdash; All Rights Reserved</div>
+      <div class="flex gap-6 mt-2 md:mt-0">
+        <a href="/privacy" class="hover:text-slate-300 transition-colors">Privacy</a>
+        <a href="/terms" class="hover:text-slate-300 transition-colors">Terms</a>
+        <a href="/cookies" class="hover:text-slate-300 transition-colors">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
