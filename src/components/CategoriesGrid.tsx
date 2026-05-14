@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import { categories } from '../data/categories';
 
