@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { ShieldCheck, Zap, Award, Handshake } from 'lucide-react';
 import { MoleculeMotif } from './MoleculeMotif';
 
@@ -48,11 +47,7 @@ export function Values() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-0 border-t border-l border-slate-200 relative z-10">
           {limits.map((val, i) => (
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+            <div
               key={i}
               className="bg-white p-8 md:p-12 border-b border-r border-slate-200 hover:bg-slate-50 transition-colors group relative"
             >
@@ -68,7 +63,7 @@ export function Values() {
               <p className="text-sm text-text-secondary leading-relaxed font-medium">
                 {val.desc}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

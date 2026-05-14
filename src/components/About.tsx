@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 
 export function About() {
@@ -6,24 +5,17 @@ export function About() {
     <section className="py-24 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+          <div
             className="mb-8 lg:mb-0 relative"
           >
             <div className="absolute inset-0 bg-brand-orange transform -translate-x-4 translate-y-4"></div>
-            <img 
+            <img
               src="/about.webp"
-              alt="SoleChem Europe Chemical Facility" 
+              alt="SoleChem Europe Chemical Facility"
               className="relative z-10 w-full h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
             />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
+          </div>
+          <div>
             <span className="inline-block bg-brand-orange text-white px-3 py-1 text-xs font-bold uppercase tracking-widest mb-6">
                About SoleChem
             </span>
@@ -43,7 +35,7 @@ export function About() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </a>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

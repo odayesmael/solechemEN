@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { ArrowRight, FlaskConical, Settings, Beaker, PackageCheck } from 'lucide-react';
 import { MoleculeMotif } from './MoleculeMotif';
 
@@ -15,12 +14,7 @@ export function ManufacturingTeaser() {
       <MoleculeMotif variant="orbits" intensity="prominent" position="center" animated={true} />
       <div className="max-w-7xl mx-auto px-4 md:px-10 py-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative z-20"
-          >
+          <div className="relative z-20">
             <h2 className="text-brand-orange font-bold tracking-widest uppercase text-xs mb-4">
               Manufacturing Services
             </h2>
@@ -37,28 +31,19 @@ export function ManufacturingTeaser() {
               Explore Manufacturing
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 gap-4 relative z-20"
-          >
+          <div className="grid grid-cols-2 gap-4 relative z-20">
             {features.map((f, i) => (
-              <motion.div
+              <div
                 key={f.label}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
                 className="bg-slate-50 border border-slate-200 p-6 group hover:border-brand-orange/30 hover:bg-brand-orange/5 transition-colors"
               >
                 <f.icon className="w-8 h-8 text-brand-orange mb-4" />
                 <h4 className="text-sm font-bold text-brand-dark">{f.label}</h4>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

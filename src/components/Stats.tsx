@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { MoleculeMotif } from './MoleculeMotif';
 
 const stats = [
@@ -13,18 +12,14 @@ export function Stats() {
     <section className="bg-slate-100 border-b border-slate-200 relative overflow-hidden">
       <MoleculeMotif variant="atoms" intensity="subtle" position="top-left" animated={true} />
       <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 relative z-10">
-        {stats.map((stat, i) => (
-          <motion.div
+        {stats.map((stat) => (
+          <div
             key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
             className="p-8 md:p-12 text-center border-b lg:border-b-0 border-r border-slate-200 last:border-r-0"
           >
             <div className="text-3xl md:text-5xl font-black text-brand-dark mb-2">{stat.value}</div>
             <div className="text-xs font-bold text-text-light uppercase tracking-widest">{stat.label}</div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </section>

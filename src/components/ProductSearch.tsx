@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Search } from 'lucide-react';
-import { motion } from 'motion/react';
 
 export function ProductSearch() {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -19,12 +18,7 @@ export function ProductSearch() {
   return (
     <section className="bg-slate-50 py-24 border-b border-slate-200">
       <div className="max-w-5xl mx-auto px-4 md:px-8 text-center">
-        <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           className="mb-12"
-        >
+        <div className="mb-12">
           <span className="inline-block bg-brand-orange text-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
              Extensive Catalog
           </span>
@@ -34,14 +28,10 @@ export function ProductSearch() {
           <p className="text-lg md:text-xl font-bold text-slate-400 mt-4">
             Among <span className="text-brand-orange font-black">4,480+</span> products in our catalog
           </p>
-        </motion.div>
+        </div>
 
-        {/* Big Search Bar */}
-        <motion.form 
+        <form
           onSubmit={handleSearch}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           className="mb-16"
         >
           <div className="flex flex-col md:flex-row rounded-sm overflow-hidden shadow-lg border border-slate-200 bg-white">
@@ -60,15 +50,9 @@ export function ProductSearch() {
                Search
              </button>
           </div>
-        </motion.form>
+        </form>
 
-        {/* Alphabetical List */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
+        <div>
           <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-6">Browse Alphabetically</p>
           <div className="flex flex-wrap justify-center gap-1">
             {letters.map((letter) => (
@@ -81,7 +65,7 @@ export function ProductSearch() {
               </a>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

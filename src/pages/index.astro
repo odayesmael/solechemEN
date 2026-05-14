@@ -26,13 +26,13 @@ const breadcrumb = buildBreadcrumbSchema([
   jsonLd={[organizationSchema, buildWebsiteSchema(), breadcrumb]}
 >
   <Hero client:load />
-  <Stats client:visible />
-  <IndustriesBlock client:visible />
+  <Stats />
+  <IndustriesBlock client:load />
   <About />
-  <CategoriesGrid client:visible />
+  <CategoriesGrid client:load />
   <ProductSearch client:load />
-  <Values client:visible />
-  <TrustedBy client:visible />
-  <ManufacturingTeaser client:visible />
-  <CTA client:visible />
+  <Values />
+  <TrustedBy />
+  <ManufacturingTeaser />
+  <CTA client:load />
 </Layout>
