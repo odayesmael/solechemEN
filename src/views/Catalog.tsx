@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Search, ChevronDown, ChevronLeft, ChevronRight, X, Tag, Factory, MessageSquareQuote } from 'lucide-react';
 import { categories } from '../data/categories';
 import { industries } from '../data/industries';
@@ -9,31 +9,25 @@ function getSearchParams() {
   return new URLSearchParams(window.location.search);
 }
 
-export function Catalog() {
+interface CatalogProduct {
+  id: number;
+  name: string;
+  cas: string;
+  ec: string;
+  category: string;
+  industry: string | string[];
+}
+
+export function Catalog({ products }: { products: CatalogProduct[] }) {
   const searchParams = getSearchParams();
   const initialQuery = searchParams.get('q') || '';
   const activeCategory = searchParams.get('category') || '';
   const activeIndustry = searchParams.get('industry') || '';
 
-  const [products, setProducts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState(initialQuery);
   const [page, setPage] = useState(1);
   const [quoteProduct, setQuoteProduct] = useState<{ name: string; cas: string } | null>(null);
   const itemsPerPage = 50;
-
-  useEffect(() => {
-    fetch('/data/products.json')
-      .then(r => r.json())
-      .then(data => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch(e => {
-        console.error(e);
-        setLoading(false);
-      });
-  }, []);
 
   const filteredProducts = products.filter(p => {
     if (activeCategory) {
@@ -190,13 +184,7 @@ export function Catalog() {
             )}
         </div>
 
-        {loading ? (
-          <div className="flex flex-col items-center justify-center py-32 space-y-4">
-            <div className="w-12 h-12 border-4 border-brand-blue/20 border-t-brand-orange rounded-full animate-spin"></div>
-            <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Loading Catalog...</div>
-          </div>
-        ) : (
-          <>
+        <>
             <div className="mb-6 flex justify-between items-center">
               <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">
                 Showing {((page - 1) * itemsPerPage) + 1}-{Math.min(page * itemsPerPage, filteredProducts.length)} of {filteredProducts.length} Results
@@ -270,7 +258,6 @@ export function Catalog() {
               </div>
             )}
           </>
-        )}
       </div>
       {quoteProduct && (
         <QuoteModal

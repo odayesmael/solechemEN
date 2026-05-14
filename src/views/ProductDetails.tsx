@@ -1,36 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, Download, FileText, AlertTriangle, ShieldCheck, Beaker, FlaskConical, Tag, Factory, BookOpen } from 'lucide-react';
 import { QuoteModal } from '../components/QuoteModal';
 
-export function ProductDetails({ slug }: { slug?: string }) {
-  const [product, setProduct] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+export function ProductDetails({ product }: { product: any }) {
   const [showQuote, setShowQuote] = useState(false);
-
-  const cas = slug?.replace('cas-', '') || '';
-
-  useEffect(() => {
-    fetch('/data/products.json')
-      .then(r => r.json())
-      .then((data: any[]) => {
-        const found = data.find(p => p.cas === cas);
-        setProduct(found);
-        setLoading(false);
-      })
-      .catch(e => {
-        console.error(e);
-        setLoading(false);
-      });
-  }, [cas]);
-
-  if (loading) {
-    return (
-      <div className="flex-1 flex items-center justify-center py-32 flex-col space-y-4">
-        <div className="w-12 h-12 border-4 border-brand-blue/20 border-t-brand-orange rounded-full animate-spin"></div>
-        <div className="text-xs font-bold text-slate-500 uppercase tracking-widest">Loading Product...</div>
-      </div>
-    );
-  }
 
   if (!product) {
     return (

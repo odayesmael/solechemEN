@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Industries } from '../views/Industries';
+import Industries from '../views/Industries.astro';
 import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
 
 const breadcrumb = buildBreadcrumbSchema([
@@ -15,5 +15,5 @@ const breadcrumb = buildBreadcrumbSchema([
   canonical={buildCanonicalUrl('/industries')}
   jsonLd={[breadcrumb]}
 >
-  <Industries client:load />
+  <Industries />
 </Layout>

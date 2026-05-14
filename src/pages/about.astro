@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { About } from '../views/About';
+import About from '../views/About.astro';
 import { buildCanonicalUrl, buildBreadcrumbSchema, organizationSchema } from '../utils/seo';
 
 const breadcrumb = buildBreadcrumbSchema([
@@ -15,5 +15,5 @@ const breadcrumb = buildBreadcrumbSchema([
   canonical={buildCanonicalUrl('/about')}
   jsonLd={[breadcrumb, organizationSchema]}
 >
-  <About client:load />
+  <About />
 </Layout>

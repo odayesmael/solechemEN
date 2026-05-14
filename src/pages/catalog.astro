@@ -2,6 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import { Catalog } from '../views/Catalog';
 import { buildCanonicalUrl, buildBreadcrumbSchema } from '../utils/seo';
+import productsRaw from '../data/products.json';
+
+const products = productsRaw.map((p: any) => ({
+  id: p.id,
+  name: p.name,
+  cas: p.cas,
+  ec: p.ec,
+  category: p.category,
+  industry: p.industry,
+}));
 
 const url = Astro.url;
 const activeCategory = url.searchParams.get('category') || '';
@@ -44,5 +54,5 @@ const breadcrumb = buildBreadcrumbSchema([
   ogImage={buildCanonicalUrl('/og-catalog.webp')}
   jsonLd={[breadcrumb]}
 >
-  <Catalog client:load />
+  <Catalog products={products} client:load />
 </Layout>

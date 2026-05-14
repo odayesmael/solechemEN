@@ -1,13 +1,32 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { ProductDetails } from '../../views/ProductDetails';
+import { buildCanonicalUrl, buildBreadcrumbSchema } from '../../utils/seo';
+import productsData from '../../data/products.json';
 
 const { slug } = Astro.params;
+const cas = slug?.replace('cas-', '') || '';
+const product = (productsData as any[]).find((p: any) => p.cas === cas) || null;
+
+const title = product
+  ? `${product.name} (CAS ${product.cas}) | SoleChem`
+  : 'Product Not Found | SoleChem';
+const description = product
+  ? `Buy ${product.name} (CAS ${product.cas}, EC ${product.ec}) from SoleChem. ${product.category}. ISO 9001 certified. Request a quote today.`
+  : 'Product not found.';
+
+const breadcrumb = product ? buildBreadcrumbSchema([
+  { name: 'Home', url: buildCanonicalUrl('/') },
+  { name: 'Catalog', url: buildCanonicalUrl('/catalog') },
+  { name: product.name, url: buildCanonicalUrl(`/products/cas-${product.cas}`) },
+]) : undefined;
 ---
 
 <Layout
-  title="Chemical Product | SoleChem"
-  description="High-purity industrial chemical from SoleChem. ISO 9001 & REACH compliant."
+  title={title}
+  description={description}
+  canonical={product ? buildCanonicalUrl(`/products/cas-${product.cas}`) : undefined}
+  jsonLd={breadcrumb ? [breadcrumb] : []}
 >
-  <ProductDetails slug={slug} client:load />
+  <ProductDetails product={product} client:load />
 </Layout>
